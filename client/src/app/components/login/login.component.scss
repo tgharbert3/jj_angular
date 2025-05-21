@@ -1,0 +1,40 @@
+form {
+    margin: 0 0 0 20px;
+}
+
+form h2 {
+    color: #036;
+    font-size: 80%;
+    font-weight: bold;
+    margin: 0 0 5px 10px;
+}
+
+form p {
+    margin: 0 0 5px 0;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 250px;
+}
+
+textarea {
+    width: 500px;
+    height: 125px;
+}
+
+fieldset {
+    border: none;
+}
+
+/* Setting display to block forces the label for each form element onto a line of its own. */
+
+label {
+    font-weight: bold;
+    color: #036;
+    display: block;
+}
+
+#interests div {
+    float: left;
+}
