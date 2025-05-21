@@ -1,1 +1,21 @@
-<p>login works!</p>
+<h2>Japan Journey</h2>
+<p>Ut enim ad minim veniam, quis nostrud exercitation consectetur adipisicing elit. Velit esse cillum dolore
+    ullamco laboris nisi in reprehenderit in voluptate. Mollit anim id est laborum. Sunt in culpa duis aute
+    irure dolor excepteur sint occaecat.
+</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <legend>Registered Users Login</legend>
+        <p>
+            <label>Email: </label>
+            <input type="email" id="email" formControlName="email">
+        </p>
+        <p>
+            <label>Password: </label>
+            <input type="password" id="password" formControlName="password">
+        </p>
+        <p>
+            <input type="submit" value="Login">
+        </p>
+    </fieldset>
+</form>
