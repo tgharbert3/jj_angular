@@ -1,34 +1,61 @@
 {
-  "hash": "567689b3",
-  "configHash": "2824d3dc",
-  "lockfileHash": "ba39b2da",
-  "browserHash": "e73ac0f2",
+  "hash": "30b9bc55",
+  "configHash": "534c8861",
+  "lockfileHash": "4f2279d7",
+  "browserHash": "de6b34ce",
   "optimized": {
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "898291b2",
+      "fileHash": "8ea62a91",
+      "needsInterop": false
+    },
+    "@angular/fire/app": {
+      "src": "../../../../../../node_modules/@angular/fire/fesm2022/angular-fire-app.mjs",
+      "file": "@angular_fire_app.js",
+      "fileHash": "a47a9c9d",
+      "needsInterop": false
+    },
+    "@angular/fire/auth": {
+      "src": "../../../../../../node_modules/@angular/fire/fesm2022/angular-fire-auth.mjs",
+      "file": "@angular_fire_auth.js",
+      "fileHash": "18fa4729",
+      "needsInterop": false
+    },
+    "@angular/fire/storage": {
+      "src": "../../../../../../node_modules/@angular/fire/fesm2022/angular-fire-storage.mjs",
+      "file": "@angular_fire_storage.js",
+      "fileHash": "72376527",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "09a387e3",
+      "fileHash": "b74bb854",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "4d50ea09",
+      "fileHash": "1bc0b8ec",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-SQLZZQMT": {
-      "file": "chunk-SQLZZQMT.js"
+    "chunk-SKHB2E5Q": {
+      "file": "chunk-SKHB2E5Q.js"
     },
-    "chunk-YIVJ2BNJ": {
-      "file": "chunk-YIVJ2BNJ.js"
+    "chunk-HXPH52GV": {
+      "file": "chunk-HXPH52GV.js"
+    },
+    "chunk-JUNNTYP6": {
+      "file": "chunk-JUNNTYP6.js"
+    },
+    "chunk-GVDMUQXY": {
+      "file": "chunk-GVDMUQXY.js"
+    },
+    "chunk-DTAL3UB2": {
+      "file": "chunk-DTAL3UB2.js"
     }
   }
 }
