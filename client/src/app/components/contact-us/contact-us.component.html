@@ -1,1 +1,62 @@
-<p>contact-us works!</p>
+<h2>Japan Journey</h2>
+<p>Ut enim ad minim veniam, quis nostrud exercitation consectetur adipisicing elit. Velit esse cillum dolore
+    ullamco laboris nisi in reprehenderit in voluptate. Mollit anim id est laborum. Sunt in culpa duis aute
+    irure dolor excepteur sint occaecat.
+</p>
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <legend>Contact Us</legend>
+
+        <p>
+            <label for="name">Name:</label>
+            <input id="name" type="text" formControlName="name">
+        </p>
+        <p>
+            <label for="email">Email:</label>
+            <input id="email" type="text" formControlName="email">
+        </p>
+        <p>
+            <label>Comments:</label>
+            <textarea formControlName="comments"></textarea>
+        </p>
+    </fieldset>
+    <fieldset>
+        <h2>Subscribe to newsletter?</h2>
+        <p>
+            <label for="yes">
+                <input id="yes" type="radio" value="yes" name="subscribe" formControlName="subscribe">
+                Yes</label>
+            <label for="no">
+                <input id="yes" type="radio" value="no" name="subscribe" formControlName="subscribe">
+                No</label>
+        </p>
+    </fieldset>
+    <fieldset id="interests">
+        <h2>Interests in Japan</h2>
+        <div>
+            <p><label><input type="checkbox" name="anime" formControlName="anime">Anime</label></p>
+            <p><label><input type="checkbox" name="arts" formControlName="arts">Arts & Crafts</label></p>
+            <p><label><input type="checkbox" name="judo" formControlName="judo">Judo, Karate, etc.</label></p>
+        </div>
+        <div>
+            <p><label><input type="checkbox" name="language" formControlName="language">Language/Litreature</label></p>
+            <p><label><input type="checkbox" name="science" formControlName="science">Science & Technology</label></p>
+            <p><label><input type="checkbox" name="travel" formControlName="travel">Travel</label></p>
+        </div>
+    </fieldset>
+    <fieldset>
+        <h2>How did you hear of Japan Journey?</h2>
+        <p>
+            <select (change)="changeHear($event)">
+                <option>Select One</option>
+                <option formControlName="hear" value="Social Media">Social Media</option>
+                <option formControlName="hear" value="Recommended by Friends">Recommended by Friends</option>
+                <option formControlName="hear" value="Search Engine">Search Engine</option>
+            </select>
+        </p>
+        <p>
+            <label><input type="checkbox" name="terms" formControlName="terms">I agree to terms and conditions</label>
+        </p>
+    </fieldset>
+    <input type="submit">
+</form>
