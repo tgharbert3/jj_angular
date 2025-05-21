@@ -22,9 +22,9 @@ nav {
             color: #00425E;
 
             &:hover {
-                border-left-color: #fff;
-                background-color: #00425E;
-                color: #fff;
+                border-left-color: #fff !important;
+                background-color: #00425E !important;
+                color: #fff !important;
             }
 
             &:visited {
@@ -32,17 +32,11 @@ nav {
                 color: #00425E;
             }
 
-
+            &.active {
+                border-left-color: #fff;
+                background-color: transparent;
+                color: #0074A5;
+            }
         }
-
-        .active {
-            border-left-color: #fff !important;
-            background-color: transparent !important;
-            color: #0074A5 !important;
-        }
-
-
-
-
     }
 }
