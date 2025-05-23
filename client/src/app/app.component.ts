@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { BackgroundComponent } from './layout/background/background.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BackgroundComponent],
+  imports: [BackgroundComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
