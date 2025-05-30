@@ -1,2 +1,2 @@
 *.env
-.angular/cache/
+.angular/cache/*
