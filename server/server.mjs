@@ -11,6 +11,10 @@ app.get('/', (req, res) => {
     res.send('hello world!');
 });
 
+app.get('/test', (req, res) => {
+    res.send('test');
+})
+
 app.get('/images/:id', async (req, res) => {
     const imageId = parseInt(req.params.id, 10);
 

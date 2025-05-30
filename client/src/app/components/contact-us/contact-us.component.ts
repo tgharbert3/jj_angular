@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-contact-us',
@@ -15,7 +15,7 @@ export class ContactUsComponent {
     name: [''],
     email: [''],
     comments: [''],
-    subscribe: ['yes', [Validators.required]],
+    subscribe: ['yes'],
     anime: [false],
     arts: [false],
     judo: [false],
