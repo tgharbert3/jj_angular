@@ -1,1 +1,8 @@
-<p>gallery works!</p>
+<h2>Thumbs</h2>
+<ul>
+    @for(thumb of thumbs$ | async; track $index) {
+    <li>
+        {{thumb.filename}}
+    </li>
+    }
+</ul>
