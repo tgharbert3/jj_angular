@@ -3,12 +3,14 @@ const path = require('path');
 const dotenv = require('dotenv');
 const https = require("https");
 const fs = require('fs');
+const cors = require('cors');
 
 const imagesRouter = require('./routes/images.router.js');
 const thumbsRouter = require('./routes/thumbs.router.js');
 
 dotenv.config({ path: '../../.env' });
 const app = express();
+app.use(cors())
 const PORT = process.env.PORT || 3000;
 
 app.enable('trust proxy');
