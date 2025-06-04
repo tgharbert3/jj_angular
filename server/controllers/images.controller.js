@@ -9,7 +9,7 @@ const getImage = async (image_id) => {
     if (validateImageId(image_id)) {
         try {
             const imageInfo = await findImagebyId(image_id);
-            const filename = imageInfo[0]?.filename;
+            const filename = imageInfo.filename;
             const image = await getImageFromServer(filename);
             return image;
         } catch (error) {

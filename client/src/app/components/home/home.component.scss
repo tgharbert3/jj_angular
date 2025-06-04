@@ -1,0 +1,21 @@
+figure {
+    float: right;
+    margin: 0 20px 0 10px;
+}
+
+/* Border and background color for the random image. */
+
+figure img {
+    padding: 10px;
+    -webkit-box-shadow: 1px 1px 15px #999999;
+    box-shadow: 1px 1px 15px #999999;
+}
+
+/* The caption on the front page is bold and centered. */
+
+figcaption {
+    margin: 0;
+    padding: 3px 10px;
+    font-weight: bold;
+    text-align: center;
+}

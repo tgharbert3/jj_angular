@@ -22,4 +22,16 @@ async function getAllFilenameFromMongo() {
     }
 }
 
-module.exports = getAllFilenameFromMongo;
+async function getFilenamesFromMongoByPage(page, pageSize) {
+
+    try {
+        const thumbs = await thumbsModel.find()
+            .skip((page - 1) * pageSize)
+            .limit(pageSize)
+        return thumbs;
+    } catch (error) {
+        throw new Error(`Database error from by page: ${error.message}`)
+    }
+}
+
+module.exports = { getAllFilenameFromMongo, getFilenamesFromMongoByPage };

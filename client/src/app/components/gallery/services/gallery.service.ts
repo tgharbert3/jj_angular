@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class GalleryService {
 
-  private thumbsUrl = 'https://hopper.cis.uncw.edu:5001/thumbs'
+  private thumbsUrl = 'https://hopper.cis.uncw.edu:5001/gallery?page=2'
   constructor(private http: HttpClient) { }
 
   getThumbs(): Observable<thumb[]> {
