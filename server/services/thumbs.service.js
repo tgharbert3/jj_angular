@@ -23,7 +23,6 @@ async function getAllFilenameFromMongo() {
 }
 
 async function getFilenamesFromMongoByPage(page, pageSize) {
-
     try {
         const thumbs = await thumbsModel.find()
             .skip((page - 1) * pageSize)
@@ -34,4 +33,23 @@ async function getFilenamesFromMongoByPage(page, pageSize) {
     }
 }
 
-module.exports = { getAllFilenameFromMongo, getFilenamesFromMongoByPage };
+/**
+ * Fetches files from server storage
+ * @param {object} filenames - array of objects from mongoDb
+ * @returns {Array} of thumb files from server
+ */
+async function getThumbsFromServer(filenames) {
+    let thumbsFileList = []
+    try {
+        filenames.forEach(element => {
+            const thumb = path.join(__dirname, '..', 'assets', 'thumbs', `${element.filename}`);
+            thumbsFileList.push(thumb);
+        });
+        return thumbsFileList;
+    } catch (error) {
+        return error.message;
+    }
+
+}
+
+module.exports = { getAllFilenameFromMongo, getFilenamesFromMongoByPage, getThumbsFromServer };
