@@ -2,7 +2,7 @@
 Needs to verify secuirty of requests. 
 */
 
-const { findImagebyId, getImageFromServer } = require('../services/images.service')
+const { findImagebyId, getImageFromServer, getImagesMetaData } = require('../services/images.service')
 
 
 const getImage = async (image_id) => {
@@ -17,6 +17,16 @@ const getImage = async (image_id) => {
         }
     } else {
         return "Failed to get image";
+    }
+}
+
+async function getAllImagesMetadata() {
+
+    try {
+        const metadata = await getImagesMetaData();
+        return metadata;
+    } catch (error) {
+        throw new Error("Could not get all images metadata.");
     }
 }
 
@@ -36,4 +46,4 @@ const isNumber = (num) => {
     }
 }
 
-module.exports = getImage;
+module.exports = { getImage, getAllImagesMetadata };
