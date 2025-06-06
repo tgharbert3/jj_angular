@@ -13,7 +13,6 @@ initConnection();
 
 const imageModel = connection.model('images', imageSchema);
 
-//TODO: function should return one image. It is currenly returning an array of objects.
 async function findImagebyId(imageId) {
     try {
         const result = await imageModel.findOne({ image_id: imageId });
@@ -26,16 +25,24 @@ async function findImagebyId(imageId) {
 function getImageFromServer(filename) {
 
     try {
-        console.log(filename + " From service")
         const image = path.join(__dirname, '..', 'assets', 'images', `${filename}`)
         return image
     } catch (error) {
         return error.message;
     }
+}
 
+async function getImagesMetaData() {
+    try {
+        const metadata = await imageModel.find();
+        return metadata;
+    } catch (error) {
+        return error.message;
+    }
 }
 
 module.exports = {
     findImagebyId,
-    getImageFromServer
+    getImageFromServer,
+    getImagesMetaData,
 };
