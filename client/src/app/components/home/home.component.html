@@ -2,9 +2,9 @@
 <p>Ut enim ad minim veniam, quis nostrud exercitation consectetur adipisicing elit. Velit esse cillum dolore ullamco
     laboris nisi in reprehenderit in voluptate. Mollit anim id est laborum. Sunt in culpa duis aute irure dolor
     excepteur sint occaecat.</p>
-<figure>
+<figure *ngIf="currentMetadata && imageSrc">
     <img [src]="imageSrc" alt="image from server">
-    <figcaption>This is a placeholder caption</figcaption>
+    <figcaption>{{this.currentMetadata.caption}}</figcaption>
 </figure>
 <p>Eu fugiat nulla pariatur. Ut labore et dolore magna aliqua. Cupidatat non proident, quis nostrud exercitation ut
     enim

@@ -4,8 +4,7 @@ Needs to verify secuirty of requests.
 
 const { findImagebyId, getImageFromServer, getImagesMetaData } = require('../services/images.service')
 
-
-const getImage = async (image_id) => {
+async function getImage(image_id) {
     if (validateImageId(image_id)) {
         try {
             const imageInfo = await findImagebyId(image_id);
