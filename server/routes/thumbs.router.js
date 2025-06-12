@@ -2,10 +2,10 @@ const express = require('express');
 const thumbsRouter = express.Router();
 const getAllThumbs = require('../controllers/thumbs.controller')
 
-thumbsRouter.get('/', async (req, res) => {
+thumbsRouter.get('/load', async (req, res) => {
     try {
-        const thumbs = await getAllThumbs();
-        res.json(thumbs);
+        await getAllThumbs();
+        res.json({ loaded: "Loaded" });
     } catch (error) {
         res.status(500).json({ error: "Failed at Thumbs router" });
     }

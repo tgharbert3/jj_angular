@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
       this.metadataList = metadata;
 
       const randomIndex = Math.floor(Math.random() * this.metadataList.length);
+      console.log(randomIndex);
       this.currentMetadata = this.metadataList[randomIndex];
 
       if (this.currentMetadata) {

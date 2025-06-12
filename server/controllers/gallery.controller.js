@@ -7,7 +7,7 @@ const { getFilenamesFromMongoByPage, getThumbsFromServer } = require('../service
  * @param {number} page
  * @returns {Array} of thumbs files 
  */
-async function getThumbs(page) {
+async function loadThumbs(page) {
     try {
         const filenames = await getFilenamesByPages(page);
         const files = getThumbsFromServer(filenames);
@@ -15,7 +15,6 @@ async function getThumbs(page) {
     } catch (error) {
         throw new Error(`Gallery Controller Error at get Thumbs: ${error.message}`);
     }
-
 }
 
 async function getFilenamesByPages(page) {
@@ -35,4 +34,4 @@ async function getFilenamesByPages(page) {
         throw new Error(`Gallery Controller Error: ${error.message}`);
     }
 }
-module.exports = { getThumbs };
+module.exports = { loadThumbs };

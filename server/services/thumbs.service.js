@@ -22,7 +22,7 @@ async function getAllFilenameFromMongo() {
     }
 }
 
-async function getFilenamesFromMongoByPage(page, pageSize) {
+async function loadFilenamesFromMongoByPage(page, pageSize) {
     try {
         const thumbs = await thumbsModel.find()
             .skip((page - 1) * pageSize)
@@ -52,4 +52,4 @@ async function getThumbsFromServer(filenames) {
 
 }
 
-module.exports = { getAllFilenameFromMongo, getFilenamesFromMongoByPage, getThumbsFromServer };
+module.exports = { getAllFilenameFromMongo, loadFilenamesFromMongoByPage, getThumbsFromServer };

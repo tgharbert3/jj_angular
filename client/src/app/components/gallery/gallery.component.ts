@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { GalleryService, thumb } from './services/gallery.service';
+import { GalleryService, thumbFilePath } from './services/gallery.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 
@@ -13,10 +13,20 @@ export class GalleryComponent implements OnInit {
 
   private galleryService = inject(GalleryService);
 
-  thumbs$!: Observable<thumb[]>;
+  pageNumber = 1;
+  thumbs$!: Observable<thumbFilePath[]>;
 
   ngOnInit(): void {
-    this.thumbs$ = this.galleryService.getThumbs();
+    try {
+      this.thumbs$ = this.galleryService.loadThumbFilenamesByPage(this.pageNumber);
+    } catch (error) {
+      return console.error(`Error during image loading`, error);
+    }
+
+  }
+
+  increasePage(): void {
+
   }
 
 }

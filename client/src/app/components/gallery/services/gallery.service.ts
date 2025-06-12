@@ -2,22 +2,27 @@ import { Injectable, } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface thumbFilePath {
+  filename: String,
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class GalleryService {
 
-  private thumbsUrl = 'https://hopper.cis.uncw.edu:5001/gallery?page=2'
+  private thumbsUrlBase = 'https://hopper.cis.uncw.edu:5001/gallery?page='
   constructor(private http: HttpClient) { }
 
-  getThumbs(): Observable<thumb[]> {
-    const thumbs = this.http.get<thumb[]>(this.thumbsUrl)
+  loadThumbFilenamesByPage(pageNumber: number): Observable<thumbFilePath[]> {
+    const thumbs = this.http.get<thumbFilePath[]>(`${this.thumbsUrlBase}${pageNumber}`)
     return thumbs;
   }
-}
 
-export interface thumb {
-  id: String,
-  filename: String,
+
+
+  // getImage(): Observable<Blob> {
+  //   const image = this.http.get(this.imageUrl, { responseType: 'blob' })
+  //   return image
+  // }
 }
