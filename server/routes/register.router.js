@@ -6,7 +6,7 @@ const { insertNewUserController } = require('../controllers/register.controller'
 const registerRouter = express.Router();
 
 /**
- * Post rost for Registering a new user. Validated and sanitizes input.
+ * Post route for Registering a new user. Validated and sanitizes input.
  */
 registerRouter.post('/', [
     body('firstName')
