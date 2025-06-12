@@ -4,19 +4,20 @@ const dotenv = require('dotenv');
 const https = require("https");
 const fs = require('fs');
 const cors = require('cors');
+const helmet = require('helmet');
 
 const imagesRouter = require('./routes/images.router.js');
 const galleryRouter = require('./routes/gallery.router.js');
-const { register } = require('module');
 
 dotenv.config({ path: '../../.env' });
 const app = express();
-app.use(cors())
 const PORT = process.env.PORT || 3000;
 
 app.enable('trust proxy');
+app.use(helmet());
+app.use(cors());
 
-app.use('/register', registerRouter);
+// app.use('/register', registerRouter);
 app.use('/images', imagesRouter);
 app.use('/gallery', galleryRouter);
 
