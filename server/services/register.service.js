@@ -1,15 +1,7 @@
 const mongoose = require('mongoose');
-const { userSchema } = require('../schema/user.schema.js');
-const conn = require('../config/db_conn.js');
+const { userSchema } = require('../schema/user.schema')
 
-const connection = mongoose.createConnection(conn);
-
-async function initConnection() {
-    await connection.asPromise();
-}
-initConnection();
-
-const userModel = connection.model('users', userSchema);
+const userModel = mongoose.models.User || mongoose.model('User', userSchema);
 
 /**
  * Inserts a new user into mongoDB

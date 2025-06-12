@@ -1,17 +1,8 @@
 const mongoose = require('mongoose');
-const { imageSchema } = require('../schema/image.schema.js');
-const conn = require('../config/db_conn.js');
-
+const { imageSchema } = require('../schema/image.schema')
 const path = require('path');
 
-const connection = mongoose.createConnection(conn);
-
-async function initConnection() {
-    await connection.asPromise();
-}
-initConnection();
-
-const imageModel = connection.model('images', imageSchema);
+const imageModel = mongoose.models.images || mongoose.model('images', imageSchema);
 
 async function findImagebyId(imageId) {
     try {

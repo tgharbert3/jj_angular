@@ -1,17 +1,8 @@
 const mongoose = require('mongoose');
 const { thumbsSchema } = require('../schema/thumbs.schema.js');
-const conn = require('../config/db_conn.js');
-
 const path = require('path');
 
-const connection = mongoose.createConnection(conn);
-
-async function initConnection() {
-    await connection.asPromise();
-}
-initConnection();
-
-const thumbsModel = connection.model('thumbs', thumbsSchema);
+const thumbsModel = mongoose.models.thumbs || mongoose.model('thumbs', thumbsSchema);
 
 async function getAllFilenameFromMongo() {
     try {
