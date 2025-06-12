@@ -8,16 +8,18 @@ const helmet = require('helmet');
 
 const imagesRouter = require('./routes/images.router.js');
 const galleryRouter = require('./routes/gallery.router.js');
+const registerRouter = require('./routes/register.router.js');
 
 dotenv.config({ path: '../../.env' });
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.enable('trust proxy');
+app.use(express.json());
+// app.enable('trust proxy');
 app.use(helmet());
 app.use(cors());
 
-// app.use('/register', registerRouter);
+app.use('/register', registerRouter);
 app.use('/images', imagesRouter);
 app.use('/gallery', galleryRouter);
 
