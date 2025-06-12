@@ -1,7 +1,9 @@
 const express = require('express');
-const registerRouter = express.Router();
-
 const { body, validationResult } = require('express-validator');
+
+const { insertNewUserController } = require('../controllers/register.controller');
+
+const registerRouter = express.Router();
 
 /**
  * Post rost for Registering a new user. Validated and sanitizes input.
@@ -50,13 +52,18 @@ registerRouter.post('/', [
         })
 
 
-], (req, res) => {
+], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    res.status(200).json({ message: "All validations passed" })
+    const newUser = await insertNewUserController(req.body.firstName, req.body.lastName, email = req.body.email, req.body.password);
+    res.status(200).json({
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        email: newUser.email,
+    });
 })
 
 
