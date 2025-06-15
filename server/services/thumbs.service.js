@@ -18,29 +18,28 @@ async function loadFilenamesFromMongoByPage(page, pageSize) {
         const thumbs = await thumbsModel.find()
             .skip((page - 1) * pageSize)
             .limit(pageSize)
-        return thumbs;
+        const filenames = thumbs.map(thumb => thumb.filename);
+        return filenames;
     } catch (error) {
         throw new Error(`Database error from by page: ${error.message}`)
     }
 }
 
 /**
- * Fetches files from server storage
- * @param {object} filenames - array of objects from mongoDb
- * @returns {Array} of thumb files from server
+ * Fetches thumb file from server
+ * @param {string} filename of file to fetch
+ * @returns {file} of thumb file from server
  */
-async function getThumbsFromServer(filenames) {
-    let thumbsFileList = []
+async function getThumbFromServer(filename) {
+
     try {
-        filenames.forEach(element => {
-            const thumb = path.join(__dirname, '..', 'assets', 'thumbs', `${element.filename}`);
-            thumbsFileList.push(thumb);
-        });
-        return thumbsFileList;
-    } catch (error) {
-        return error.message;
+        const thumb = path.join(__dirname, '..', 'assets', 'thumbs', `${filename}`);
+        return thumb
+    }
+    catch (error) {
+        console.error("Error in loading thumb from server", error);
     }
 
 }
 
-module.exports = { getAllFilenameFromMongo, loadFilenamesFromMongoByPage, getThumbsFromServer };
+module.exports = { getAllFilenameFromMongo, loadFilenamesFromMongoByPage, getThumbFromServer };

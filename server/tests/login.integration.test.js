@@ -1,5 +1,3 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
 const https = require('https');
 const fetch = require('node-fetch');
 
@@ -19,8 +17,8 @@ describe('POST /login', () => {
 
         expect(response.status).toBe(200);
 
-        const userEmail = await response.json();
-        expect(userEmail.email).toBe("test@gmail.com")
+        const user = await response.json();
+        expect(user.email).toBe("test@gmail.com")
 
     }, 15000);
 });
