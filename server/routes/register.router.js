@@ -58,12 +58,23 @@ registerRouter.post('/', [
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const newUser = await insertNewUserController(req.body.firstName, req.body.lastName, email = req.body.email, req.body.password);
-    res.status(200).json({
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        email: newUser.email,
-    });
+    try {
+        const newUser = await insertNewUserController(req.body.firstName, req.body.lastName, email = req.body.email, req.body.password);
+        console.log(req.body.firstName);
+        if (newUser) {
+            res.status(200).json({
+                firstName: newUser.firstName,
+                lastName: newUser.lastName,
+                email: newUser.email,
+            });
+        } else {
+            res.status(400).json({ error: "Unable to save user" });
+        }
+    } catch (error) {
+        console.error('Unable to save user', error);
+    }
+
+
 })
 
 

@@ -9,22 +9,99 @@
             <label for="firstName">First Name:</label>
             <input type="text" id="firstName" formControlName="firstName">
         </p>
+        @if(firstName?.invalid && (firstName?.dirty || firstName?.touched)) {
+        @if(firstName?.hasError('required')) {
+        <p class="error">
+            First Name is Required
+        </p>
+        }
+        }
         <p>
             <label for="lastName">Last Name:</label>
             <input type="text" id="lastName" formControlName="lastName">
         </p>
+        @if(lastName?.invalid && (lastName?.dirty || lastName?.touched)) {
+        @if(lastName?.hasError('required')) {
+        <p class="error">
+            Last Name is Required
+        </p>
+        }
+        }
         <p>
             <label for="email">Email:</label>
             <input type="email" id="email" formControlName="email">
         </p>
+        @if (email?.invalid && (email?.dirty || email?.touched)) {
+        @if(email?.hasError('required')) {
+        <p class="error">
+            Email is Required
+        </p>
+        }
+        @if(email?.hasError('email')) {
+        <p class="error">
+            Must be a valid email
+        </p>
+        }
+        }
         <p>
             <label for="password">Password:</label>
             <input type="password" id="password" formControlName="password">
         </p>
+
+        @if (password?.invalid && (password?.dirty || password?.touched)) {
+        @if(password?.hasError('required')) {
+        <p class="error">
+            Password is Required
+        </p>
+        }
+        @if(password?.hasError('minlength')) {
+        <p class="error">
+            Password must be 8 characters
+        </p>
+        }
+        @if(password?.hasError('maxlength')) {
+        <p class="error">
+            Password can not be more than 32 characters
+        </p>
+        }
+
+        @if (password?.hasError('pattern')) {
+        <p class="error">Password must have at lease one upper/lower case, 1 number, and one of these symobols: !#$%^&*
+        </p>
+        }
+
+        }
         <p>
             <label for="confirm_password">Confirm Password:</label>
             <input type="password" id="confirm_password" formControlName="confirmPassword">
         </p>
-        <p><input type="submit" value="Register"></p>
+
+        @if (confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)) {
+        @if(confirmPassword?.hasError('required')) {
+        <p class="error">
+            Password is Required
+        </p>
+        }
+        @if(confirmPassword?.hasError('minlength')) {
+        <p class="error">
+            Password must be 8 characters
+        </p>
+        }
+        @if(confirmPassword?.hasError('maxlength')) {
+        <p class="error">
+            Password can not be more than 32 characters
+        </p>
+        }
+
+        @if (confirmPassword?.hasError('pattern')) {
+        <p class="error">Password must have at lease one upper/lower case, 1 number, and one of these symobols: !#$%^&*
+        </p>
+        }
+        }
+
+        @if (registerForm.errors?.['passwordMismatch'] && registerForm.touched) {
+        <p class="error">Passwords Must match</p>
+        }
+        <p><button [disabled]="registerForm.invalid" (click)="onSubmit()">Register</button></p>
     </fieldset>
 </form>

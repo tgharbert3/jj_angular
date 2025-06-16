@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   private loginUrl = 'https://hopper.cis.uncw.edu:5001/login';
+  private registerUrl = 'https://hopper.cis.uncw.edu:5001/register';
 
   private isAuthenticated = false;
 
@@ -19,5 +20,12 @@ export class AuthService {
     const headers = new HttpHeaders({ 'Content-Type': "application/json" });
 
     return this.http.post(this.loginUrl, body, { headers });
+  }
+
+  public sendRegistrationInformation(firstName: string, lastName: string, email: string, password: string, confirmPassword: string): Observable<any> {
+    const body = { firstName: firstName, lastName: lastName, email: email, password: password, verify_password: confirmPassword };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post(this.registerUrl, body, { headers });
   }
 }

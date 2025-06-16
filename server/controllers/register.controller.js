@@ -14,7 +14,12 @@ async function insertNewUserController(firstName, lastName, email, password) {
 
         const hashedPassword = await hashPassword(password);
         const newUser = await insertNewUser(firstName, lastName, email, hashedPassword);
-        return newUser;
+        if (newUser) {
+            return newUser;
+        } else {
+            return null;
+        }
+
     } catch (error) {
         return "Error in insertering new user controller";
     };

@@ -20,7 +20,12 @@ async function insertNewUser(firstName, lastName, email, hashedPassword) {
             email,
             password: hashedPassword
         });
-        return newUser
+        if (newUser) {
+            return newUser
+        } else {
+            return null;
+        }
+
     } catch (error) {
         console.error('Error inserting new user:', error);
         throw error;
