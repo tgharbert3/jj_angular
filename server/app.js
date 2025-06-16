@@ -6,6 +6,8 @@ const helmet = require('helmet');
 const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 mongoose.connect(process.env.ATLAS_URI);
 
@@ -16,9 +18,28 @@ const loginRouter = require('./routes/login.router.js');
 const thumbsRouter = require('./routes/thumbs.router.js');
 
 app.use(express.json());
-// app.enable('trust proxy');
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:4200',
+    credentials: true
+}));
+app.use(session({
+    secret: process.env.SESSION_KEY,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.ATLAS_URI,
+        collectionName: 'sessions',
+        ttl: 14 * 24 * 60 * 60
+    }),
+    cookie: {
+        secure: false,
+        httpOnly: true,
+        sameSite: 'lax',
+        maxAge: 1000 * 60 * 60
+    }
+}
+))
 
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);

@@ -14,7 +14,7 @@ async function loginUserController(email, password) {
             const matched = await verifyPassword(password, userFromDB.password)
             if (matched) {
                 //start session and return
-                return userFromDB.email;
+                return userFromDB;
             }
         } else {
             return null;

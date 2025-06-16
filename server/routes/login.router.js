@@ -33,8 +33,9 @@ loginRouter.post('/', [
     try {
         const user = await loginUserController(req.body.email, req.body.password);
         if (user) {
+            req.session.user = { id: user.id, email: user.email };
             res.status(200).json({
-                email: user
+                firstName: user.firstName
             });
         } else {
             res.status(401).json({

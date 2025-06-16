@@ -60,8 +60,8 @@ registerRouter.post('/', [
 
     try {
         const newUser = await insertNewUserController(req.body.firstName, req.body.lastName, email = req.body.email, req.body.password);
-        console.log(req.body.firstName);
         if (newUser) {
+            req.session.user = { id: newUser.id, email: newUser.email }
             res.status(200).json({
                 firstName: newUser.firstName,
                 lastName: newUser.lastName,
