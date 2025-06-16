@@ -37,4 +37,13 @@ label {
 
 #interests div {
     float: left;
+
+}
+
+input.invalid {
+    border: 1px solid red;
+}
+
+.error {
+    color: red;
 }

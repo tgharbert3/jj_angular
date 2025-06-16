@@ -30,11 +30,23 @@ loginRouter.post('/', [
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
+    try {
+        const user = await loginUserController(req.body.email, req.body.password);
+        if (user) {
+            res.status(200).json({
+                email: user
+            });
+        } else {
+            res.status(401).json({
+                message: "User not found"
+            })
+        }
+    } catch (error) {
+        console.error('Login Error', error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
 
-    const user = await loginUserController(req.body.email, req.body.password);
-    res.status(200).json({
-        email: user
-    });
+
 })
 
 module.exports = loginRouter;

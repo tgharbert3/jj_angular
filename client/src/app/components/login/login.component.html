@@ -8,14 +8,57 @@
         <legend>Registered Users Login</legend>
         <p>
             <label>Email: </label>
-            <input type="email" id="email" formControlName="email">
+            <input type="email" id="email" formControlName="email" required
+                [class.invalid]="email?.invalid && (email?.dirty || email?.touched)">
         </p>
+        @if (email?.invalid && (email?.dirty || email?.touched)) {
+        @if(email?.hasError('required')) {
+        <p class="error">
+            Email is Required
+        </p>
+        }
+        @if(email?.hasError('email')) {
+        <p class="error">
+            Must be a valid email
+        </p>
+        }
+        }
+
         <p>
             <label>Password: </label>
-            <input type="password" id="password" formControlName="password">
+            <input type="password" id="password" formControlName="password" class="form-control">
         </p>
+        @if (password?.invalid && (password?.dirty || password?.touched)) {
+        @if(password?.hasError('required')) {
+        <p class="error">
+            Password is Required
+        </p>
+        }
+        @if(password?.hasError('minlength')) {
+        <p class="error">
+            Password must be 8 characters
+        </p>
+        }
+        @if(password?.hasError('maxlength')) {
+        <p class="error">
+            Password can not be more than 32 characters
+        </p>
+        }
+
+        @if (password?.hasError('pattern')) {
+        <p class="error">Password must have at lease one upper/lower case, 1 number, and one of these symobols: !#$%^&*
+        </p>
+        }
+
+        }
         <p>
             <input type="submit" value="Login">
         </p>
+
+        @if(errorMessage) {
+        <p class="error">
+            {{errorMessage}}
+        </p>
+        }
     </fieldset>
 </form>

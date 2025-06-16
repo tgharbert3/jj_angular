@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, } from '@angular/core';
 import { GalleryService } from '../../services/gallery.service';
 import { CommonModule } from '@angular/common';
-import { Observable, firstValueFrom, forkJoin } from 'rxjs';
+import { firstValueFrom, forkJoin } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { ImageService } from '../../services/image.service';

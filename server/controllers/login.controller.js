@@ -5,7 +5,7 @@ const argon2 = require('argon2');
  * Controller function to verify user information
  * @param {string} email 
  * @param {string} password 
- * @returns user
+ * @returns user or null
  */
 async function loginUserController(email, password) {
     try {
@@ -17,7 +17,7 @@ async function loginUserController(email, password) {
                 return userFromDB.email;
             }
         } else {
-            return "User not Found";
+            return null;
         }
     } catch (error) {
         console.error("Login Error", error);
