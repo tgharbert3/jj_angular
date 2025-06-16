@@ -7,7 +7,8 @@ const thumbsModel = mongoose.models.thumbs || mongoose.model('thumbs', thumbsSch
 async function getAllFilenameFromMongo() {
     try {
         const thumbs = await thumbsModel.find();
-        return thumbs
+        const filenames = thumbs.map(thumb => thumb.filename);
+        return filenames
     } catch (error) {
         throw new Error(`Database error from Thumbs: ${error.message}`)
     }

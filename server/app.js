@@ -13,6 +13,7 @@ const imagesRouter = require('./routes/images.router.js');
 const galleryRouter = require('./routes/gallery.router.js');
 const registerRouter = require('./routes/register.router.js');
 const loginRouter = require('./routes/login.router.js');
+const thumbsRouter = require('./routes/thumbs.router.js');
 
 app.use(express.json());
 // app.enable('trust proxy');
@@ -23,6 +24,7 @@ app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/images', imagesRouter);
 app.use('/gallery', galleryRouter);
+app.use('/thumbs', thumbsRouter);
 
 app.use(express.static(path.join(__dirname, '..', 'dist', 'client', 'jj')));
 
