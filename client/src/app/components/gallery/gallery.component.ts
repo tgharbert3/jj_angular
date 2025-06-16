@@ -24,7 +24,6 @@ export class GalleryComponent implements OnInit {
   thumbs: any[] = [];
   currentImage: any;
   pageNumber = 1;
-  thumbsFilenames$!: Observable<string[]>;
   metadataList: any[] = [];
   imageId: number = 1;
   totalPages: number = 0;
@@ -38,6 +37,9 @@ export class GalleryComponent implements OnInit {
       this.loadThumbnails();
 
       this.metadataList = await this.galleryService.loadMetadata();
+      this.metadataList.map(file => {
+        file.caption = this.galleryService.shortTitle(file.caption);
+      })
       this.totalPages = Math.ceil(this.metadataList.length / 6);
 
       this.route.queryParams.subscribe(params => {
@@ -84,7 +86,6 @@ export class GalleryComponent implements OnInit {
       this.endImg = this.offset + this.NUM_IMAGES;
     }
   };
-
 
   public increasePage(): void {
     this.pageNumber++;

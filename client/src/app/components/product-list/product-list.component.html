@@ -1,1 +1,19 @@
-<p>product-list works!</p>
+<h2>Images of Japan</h2>
+<h3>Each of our lovely images may be purchased for you to enjoy in your home or to give as a gift</h3>
+<h4>Please click the View Details button to make a purchase</h4>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Image</th>
+        <th></th>
+    </tr>
+    @for (thumb of thumbs; track $index) {
+    <tr>
+        <td>{{metadataList[$index].filename}}</td>
+        <td><img [src]="thumb"></td>
+        <td><button>View Details</button></td>
+    </tr>
+    }
+
+</table>

@@ -11,20 +11,25 @@ export class GalleryService {
 
   metadataList: any[] = [];
 
-  private thumbsUrlBase = 'https://hopper.cis.uncw.edu:5001/gallery/load?page='
-  private thumbImageUrl = 'https://hopper.cis.uncw.edu:5001/gallery/thumb?filename='
+  private thumbsUrlPageBase = 'https://hopper.cis.uncw.edu:5001/gallery/load?page=';
+  private thumbImageUrl = 'https://hopper.cis.uncw.edu:5001/gallery/thumb?filename=';
+  private allThumbURL = 'https://hopper.cis.uncw.edu:5001/thumbs/load';
 
   constructor(private http: HttpClient, private imageService: ImageService) {
   }
 
   loadThumbFilenamesByPage(pageNumber: number): Observable<string[]> {
-    return this.http.get<string[]>(`${this.thumbsUrlBase}${pageNumber}`);
+    return this.http.get<string[]>(`${this.thumbsUrlPageBase}${pageNumber}`);
   }
 
   getThumbBlob(filename: string): Observable<Blob> {
     const image = this.http.get(`${this.thumbImageUrl}${filename}`, { responseType: 'blob' })
     return image
   }
+
+  loadAllThumbsFilenames() {
+    return this.http.get<string[]>(`${this.allThumbURL}`);
+  };
 
   public async loadMetadata(): Promise<any[]> {
     try {
@@ -35,6 +40,15 @@ export class GalleryService {
       console.error('Failed to load metadata:', error);
       return [];
     }
+  };
+
+  public shortTitle(title: string): string {
+    title = title.slice(0, -4);
+    title = title.replace(/_/g, ' ');
+    title = title.split(' ').map(word =>
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+    return title;
   }
 }
 
