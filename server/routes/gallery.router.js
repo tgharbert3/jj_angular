@@ -9,7 +9,7 @@ galleryRouter.get('/load', async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1
         const filenames = await loadThumbs(page);
-        res.status(200).json({ "filenames": filenames });
+        res.status(200).json(filenames);
     } catch (error) {
         console.error("Error in loading thumbs", error);
         if (!res.headersSent) {

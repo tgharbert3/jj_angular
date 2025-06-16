@@ -1,8 +1,42 @@
-<h2>Thumbs</h2>
-<ul>
-    @for(thumb of thumbs$ | async; track $index) {
-    <li>
-        {{thumb.filename}}
-    </li>
-    }
-</ul>
+<h2>Japan Journey</h2>
+<p id="picCount">Showing {{this.startImg}} - {{this.endImg}} of {{this.metadataList.length}}</p>
+<section id="gallery">
+    <table id="thumbs">
+        <tbody>
+            @for (row of [0,1,2]; track row) {
+            <tr>
+                @for(col of [0,1]; track col) {
+                @if (thumbs[row * 2]) {
+                <td>
+                    <a routerLink="/gallery" routerLinkActive="active"
+                        [queryParams]="{page: pageNumber, image_id: startImg + (row * 2 + col)}">
+                        <img [src]="thumbs[row * 2 + col]">
+                    </a>
+                </td>
+                } @else {<td></td>}
+                }
+
+            </tr>
+            }
+            <tr>
+                <td>
+                    @if(pageNumber > 1) {
+                    <input type="button" (click)="decreasePage()" id="text_button" value="&lt;&lt;Prev" />
+                    }
+                </td>
+                <td>
+                    @if(pageNumber
+                    < totalPages) { <input type="button" (click)="increasePage()" id="text_button"
+                        value="Next&gt;&gt;" />
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+<figure id="main_image">
+    <img [src]="this.currentImage">
+    <figcaption>{{this.metadataList[imageId - 1]?.caption}}</figcaption>
+</figure>

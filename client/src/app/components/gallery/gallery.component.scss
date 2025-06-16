@@ -1,0 +1,101 @@
+/* Styles for the image gallery. */
+
+#picCount {
+    color: #00425E;
+    font-weight: bold;
+}
+
+#thumbs {
+    float: left;
+    margin-top: 10px;
+}
+
+#thumbs td {
+    text-align: center;
+}
+
+#thumbs img {
+    border: none;
+    display: block;
+}
+
+#thumbs a:link,
+#thumbs a:visited,
+#thumbs a:hover,
+#thumbs a:active {
+    border: none;
+    padding: 0;
+}
+
+#main_image {
+    float: right;
+    text-align: center;
+    width: 350px;
+}
+
+#main_image p {
+    color: #00425E;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+/* The figure is for the random image on the front page. It floats to the right with a 20px right margin and a 10px left one. */
+
+figure {
+    float: right;
+    margin: 0 20px 0 10px;
+}
+
+/* Border and background color for the random image. */
+
+figure img {
+    padding: 10px;
+    -webkit-box-shadow: 1px 1px 15px #999999;
+    box-shadow: 1px 1px 15px #999999;
+}
+
+/* The caption on the front page is bold and centered. */
+
+figcaption {
+    margin: 0;
+    padding: 3px 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#text_button {
+    font-weight: bold;
+    text-decoration: none;
+    padding: 2px 4px;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+    padding: 2px 4px;
+}
+
+a:link,
+a:visited {
+    color: #00425E;
+    border-bottom: #00425E dashed 1px;
+}
+
+a:hover,
+a:active {
+    color: #fff;
+    background-color: #00425E;
+    border-bottom: none;
+}
+
+a.active {
+    border-left-color: #fff;
+    background-color: transparent;
+    color: #0074A5;
+}
