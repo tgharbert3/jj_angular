@@ -6,6 +6,7 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 export const routes: Routes = [
 
@@ -16,6 +17,7 @@ export const routes: Routes = [
     { path: "contact_us", component: ContactUsComponent },
     { path: "register", component: RegisterComponent },
     { path: "login", component: LoginComponent },
+    { path: 'logout', component: LogoutComponent },
     { path: '**', component: HomeComponent },
 
 ];

@@ -5,7 +5,14 @@
         <li><a routerLink="/gallery" routerLinkActive="active" [queryParams]="{ image_id: 1 }">Gallery</a></li>
         <li><a routerLink="/product_list" routerLinkActive="active">Purchase Prints</a></li>
         <li><a routerLink="/contact_us" routerLinkActive="active">Contact</a></li>
+        @if (!isAuthenticated){
         <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
         <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+        } @else {
+        <li><a routerLink="/upload_photo" routerLinkActive="active">Upload Photo</a></li>
+        <li><a routerLink="/view_images" routerLinkActive="active">View Images</a></li>
+        <li><a routerLink="/logout" routerLinkActive="active">Logout</a></li>
+        }
+
     </ul>
 </nav>

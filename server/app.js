@@ -16,6 +16,7 @@ const galleryRouter = require('./routes/gallery.router.js');
 const registerRouter = require('./routes/register.router.js');
 const loginRouter = require('./routes/login.router.js');
 const thumbsRouter = require('./routes/thumbs.router.js');
+const logoutRouter = require('./routes/logout.router.js');
 
 app.use(express.json());
 app.use(helmet());
@@ -27,15 +28,15 @@ app.use(session({
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-        mongoUrl: process.env.ATLAS_URI,
-        collectionName: 'sessions',
-        ttl: 14 * 24 * 60 * 60
-    }),
+    // store: MongoStore.create({
+    //     mongoUrl: process.env.ATLAS_URI,
+    //     collectionName: 'sessions',
+    //     ttl: 14 * 24 * 60 * 60
+    // }),
     cookie: {
-        secure: false,
+        secure: true,
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: 'none',
         maxAge: 1000 * 60 * 60
     }
 }
@@ -46,6 +47,7 @@ app.use('/login', loginRouter);
 app.use('/images', imagesRouter);
 app.use('/gallery', galleryRouter);
 app.use('/thumbs', thumbsRouter);
+app.use('/logout', logoutRouter)
 
 app.use(express.static(path.join(__dirname, '..', 'dist', 'client', 'jj')));
 
