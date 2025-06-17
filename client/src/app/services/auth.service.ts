@@ -22,8 +22,6 @@ export class AuthService {
   private userFirstnameSubject = new BehaviorSubject<string>("");
   public userFirstname$ = this.userFirstnameSubject.asObservable();
 
-
-
   constructor(private http: HttpClient) { }
 
   public sendLoginInformation(email: string, password: string): Observable<any> {

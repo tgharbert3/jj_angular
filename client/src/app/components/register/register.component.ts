@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { response } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +15,8 @@ export class RegisterComponent {
   private authService = inject(AuthService);
 
   errorMessage: string | null = null;
+
+  constructor(private router: Router) { }
 
   registerForm = this.formBuilder.group({
 
@@ -40,6 +42,7 @@ export class RegisterComponent {
           next: (response) => {
             console.log(response);
             this.errorMessage = null;
+            this.router.navigate(['account_created']);
           },
           error: (error) => {
             if (error.status === 400) {

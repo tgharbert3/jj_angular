@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent {
 
   private formBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
-  constructor() { }
+  constructor(private router: Router) { }
 
   errorMessage: string | null = null;
 
@@ -33,6 +33,7 @@ export class LoginComponent {
         next: (response) => {
           console.log(response);
           this.errorMessage = null;
+          this.router.navigate(['/logged_in']);
         },
         error: (error) => {
           if (error.status === 401) {
