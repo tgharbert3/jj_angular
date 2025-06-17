@@ -12,7 +12,8 @@
     <tr>
         <td>{{metadataList[$index].filename}}</td>
         <td><img [src]="thumb"></td>
-        <td><button>View Details</button></td>
+        <td><button (click)="navigateToDetails(metadataList[$index].filename, metadataList[$index].image_id)">View
+                Details</button></td>
     </tr>
     }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { GalleryService } from '../../services/gallery.service';
 import { forkJoin, switchMap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -11,6 +12,8 @@ import { forkJoin, switchMap } from 'rxjs';
 export class ProductListComponent implements OnInit {
 
   private galleryService = inject(GalleryService);
+
+  constructor(private router: Router) { }
 
   thumbs: any[] = [];
   metadataList: any[] = [];
@@ -36,4 +39,10 @@ export class ProductListComponent implements OnInit {
       this.thumbs = blobs.map(blob => URL.createObjectURL(blob));
     });
   };
+
+  public navigateToDetails(file: string, imageId: number) {
+    this.router.navigate(['/product_details'], { queryParams: { picture: file, image_id: imageId } });
+  }
 }
+
+
