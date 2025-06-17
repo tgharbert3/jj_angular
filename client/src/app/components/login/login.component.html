@@ -30,7 +30,7 @@
         @if (password?.invalid && (password?.dirty || password?.touched)) {
         @if(password?.hasError('required')) {
         <p class="error">
-            Password is Required
+            Password is required
         </p>
         }
         @if(password?.hasError('minlength')) {
@@ -45,13 +45,12 @@
         }
 
         @if (password?.hasError('pattern')) {
-        <p class="error">Password must have at lease one upper/lower case, 1 number, and one of these symobols: !#$%^&*
+        <p class="error"> Must contain one upper/lower case, 1 number, and one of these symobols: !#$%^&*
         </p>
         }
-
         }
         <p>
-            <input type="submit" value="Login">
+            <input type="submit" value="Login" [disabled]="loginForm.invalid">
         </p>
 
         @if(errorMessage) {
