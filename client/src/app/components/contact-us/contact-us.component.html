@@ -11,10 +11,25 @@
             <label for="name">Name:</label>
             <input id="name" type="text" formControlName="name">
         </p>
+        @if (name?.invalid && (name?.dirty || name?.touched)) {
+        <p class="error">Name is required</p>
+        }
         <p>
             <label for="email">Email:</label>
             <input id="email" type="text" formControlName="email">
         </p>
+        @if (email?.invalid && (email?.dirty || email?.touched)) {
+        @if(email?.hasError('required')) {
+        <p class="error">
+            Email is Required
+        </p>
+        }
+        @if(email?.hasError('email')) {
+        <p class="error">
+            Must be a valid email
+        </p>
+        }
+        }
         <p>
             <label>Comments:</label>
             <textarea formControlName="comments"></textarea>
@@ -27,38 +42,55 @@
                 <input id="yes" type="radio" value="yes" name="subscribe" formControlName="subscribe">
                 Yes</label>
             <label for="no">
-                <input id="yes" type="radio" value="no" name="subscribe" formControlName="subscribe">
+                <input id="no" type="radio" value="no" name="subscribe" formControlName="subscribe">
                 No</label>
         </p>
+        @if(subscribe?.invalid && (subscribe?.dirty || subscribe?.touched)) {
+        <div class="error">One must be selected</div>
+        }
     </fieldset>
     <fieldset id="interests">
         <h2>Interests in Japan</h2>
-        <div>
-            <p><label><input type="checkbox" name="anime" formControlName="anime">Anime</label></p>
-            <p><label><input type="checkbox" name="arts" formControlName="arts">Arts & Crafts</label></p>
-            <p><label><input type="checkbox" name="judo" formControlName="judo">Judo, Karate, etc.</label></p>
+        <div formGroupName="interests">
+            <div>
+                <p><label><input type="checkbox" name="anime" formControlName="anime">Anime</label></p>
+                <p><label><input type="checkbox" name="arts" formControlName="arts">Arts & Crafts</label></p>
+                <p><label><input type="checkbox" name="judo" formControlName="judo">Judo, Karate, etc.</label></p>
+            </div>
+            <div>
+                <p><label><input type="checkbox" name="language" formControlName="language">Language/Litreature</label>
+                </p>
+                <p><label><input type="checkbox" name="science" formControlName="science">Science & Technology</label>
+                </p>
+                <p><label><input type="checkbox" name="travel" formControlName="travel">Travel</label></p>
+            </div>
+            @if(interests?.errors?.['atLeastOneRequired'] && interests?.touched) {
+            <p class="error"> One interest must be selected</p>
+            }
         </div>
-        <div>
-            <p><label><input type="checkbox" name="language" formControlName="language">Language/Litreature</label></p>
-            <p><label><input type="checkbox" name="science" formControlName="science">Science & Technology</label></p>
-            <p><label><input type="checkbox" name="travel" formControlName="travel">Travel</label></p>
-        </div>
+
     </fieldset>
     <fieldset>
         <h2>How did you hear of Japan Journey?</h2>
         <p>
-            <select (change)="changeHear($event)">
+            <select formControlName="hear">
                 <option>Select One</option>
-                <option formControlName="hear" value="Social Media">Social Media</option>
-                <option formControlName="hear" value="Recommended by Friends">Recommended by Friends</option>
-                <option formControlName="hear" value="Search Engine">Search Engine</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Recommended by Friends">Recommended by Friends</option>
+                <option value="Search Engine">Search Engine</option>
             </select>
         </p>
+        @if (hear?.hasError('pattern') || (hear?.invalid && hear?.touched)) {
+        <p class="error"> Select One is not a valid option</p>
+        }
         <p>
             <label><input type="checkbox" name="terms" formControlName="terms">I agree to terms and conditions</label>
         </p>
+        @if(terms?.invalid && terms?.touched) {
+        <p class="error">You must agree to the terms and conditions</p>
+        }
     </fieldset>
     <p>
-        <input type="submit">
+        <input type="submit" [disabled]="!contactForm.valid">
     </p>
 </form>

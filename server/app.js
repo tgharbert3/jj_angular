@@ -17,6 +17,8 @@ const registerRouter = require('./routes/register.router.js');
 const loginRouter = require('./routes/login.router.js');
 const thumbsRouter = require('./routes/thumbs.router.js');
 const logoutRouter = require('./routes/logout.router.js');
+const contactRouter = require('./routes/contact.router.js')
+
 
 app.use(express.json());
 app.use(helmet());
@@ -47,7 +49,8 @@ app.use('/login', loginRouter);
 app.use('/images', imagesRouter);
 app.use('/gallery', galleryRouter);
 app.use('/thumbs', thumbsRouter);
-app.use('/logout', logoutRouter)
+app.use('/logout', logoutRouter);
+app.use('/contact', contactRouter);
 
 app.use(express.static(path.join(__dirname, '..', 'dist', 'client', 'jj')));
 
