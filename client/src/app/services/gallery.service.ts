@@ -11,9 +11,13 @@ export class GalleryService {
 
   metadataList: any[] = [];
 
-  private thumbsUrlPageBase = 'https://hopper.cis.uncw.edu:5001/gallery/load?page=';
-  private thumbImageUrl = 'https://hopper.cis.uncw.edu:5001/gallery/thumb?filename=';
-  private allThumbURL = 'https://hopper.cis.uncw.edu:5001/thumbs/load';
+  // private thumbsUrlPageBase = 'https://hopper.cis.uncw.edu:5001/gallery/load?page=';
+  // private thumbImageUrl = 'https://hopper.cis.uncw.edu:5001/gallery/thumb?filename=';
+  // private allThumbURL = 'https://hopper.cis.uncw.edu:5001/thumbs/load';
+
+  private thumbsUrlPageBase = 'http://localhost:5001/gallery/load?page=';
+  private thumbImageUrl = 'http://localhost:5001/gallery/thumb?filename=';
+  private allThumbURL = 'http://localhost:5001/thumbs/load';
 
   constructor(private http: HttpClient, private imageService: ImageService) {
   }

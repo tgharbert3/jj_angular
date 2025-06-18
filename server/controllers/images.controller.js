@@ -8,8 +8,11 @@ async function getImage(image_id) {
     if (validateImageId(image_id)) {
         try {
             const imageInfo = await findImagebyId(image_id);
+            console.log(imageInfo)
             const filename = imageInfo.filename;
+            console.log("filname", filename);
             const image = await getImageFromServer(filename);
+            console.log(image, "image");
             return image;
         } catch (error) {
             return "Couldnt get info";

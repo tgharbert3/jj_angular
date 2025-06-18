@@ -12,6 +12,7 @@ import { AccCreatedComponent } from './components/acc-created/acc-created.compon
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { UploadPhotoComponent } from './components/upload-photo/upload-photo.component';
 import { ViewImagesComponent } from './components/view-images/view-images.component';
+import { ViewCartComponent } from './components/view-cart/view-cart.component';
 
 export const routes: Routes = [
 
@@ -28,6 +29,7 @@ export const routes: Routes = [
     { path: 'product_details', component: ProductDetailsComponent },
     { path: 'upload_photo', component: UploadPhotoComponent },
     { path: 'view_images', component: ViewImagesComponent },
+    { path: 'view_cart', component: ViewCartComponent },
     { path: '**', component: HomeComponent },
 
 ];

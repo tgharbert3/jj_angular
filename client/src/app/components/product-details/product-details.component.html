@@ -4,6 +4,9 @@
 <h4>{{caption}}</h4>
 <h4>{{details}}</h4>
 <h4><strong>Price: </strong> ${{price}}.00
-    <button style="margin: 5px;">Add to Cart</button>
-    <button>View Cart</button>
+    <button style="margin: 5px;" [disabled]="!(isAuthenticated$ | async)" (click)="addToCart()">Add to Cart</button>
+    <button [disabled]="!(isAuthenticated$ | async)" (click)="navigateToCart()">View Cart</button>
+    @if(!(isAuthenticated$ | async)) {
+    <p>Must be logged in to add or view Cart</p>
+    }
 </h4>

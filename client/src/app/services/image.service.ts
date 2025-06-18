@@ -20,8 +20,12 @@ export interface metadataList {
 })
 export class ImageService {
 
-  private imageUrlBase = 'https://hopper.cis.uncw.edu:5001/images'
-  private metadataUrl = 'https://hopper.cis.uncw.edu:5001/images/metadata';
+  // private imageUrlBase = 'https://hopper.cis.uncw.edu:5001/images'
+  // private metadataUrl = 'https://hopper.cis.uncw.edu:5001/images/metadata';
+
+  private imageUrlBase = 'http://localhost:5001/images';
+  private metadataUrl = 'http://localhost:5001/images/metadata';
+
   constructor(private http: HttpClient) { }
 
   getAllImagesMetaData(): Observable<ImageMetadata[]> {

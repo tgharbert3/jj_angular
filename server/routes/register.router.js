@@ -62,6 +62,7 @@ registerRouter.post('/', [
         const newUser = await insertNewUserController(req.body.firstName, req.body.lastName, email = req.body.email, req.body.password);
         if (newUser) {
             req.session.user = { id: newUser.id, email: newUser.email }
+            req.session.cart = {};
             res.status(200).json({
                 firstName: newUser.firstName,
                 lastName: newUser.lastName,

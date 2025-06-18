@@ -1,0 +1,44 @@
+<h2>Your Cart</h2>
+@if(cartItemsArray.length == 0) {
+<h2>There are no products in your cart.</h2>
+<h3>Please use the Purchase Prints link to the left to shop.</h3>
+} @else {
+<h4>To remove an item from your cart, change its quantity to 0.</h4>
+<form>
+    <table>
+        <tr id="cart_header">
+            <th class="left">Image</th>
+            <th class="right">Price</th>
+            <th class="right">Quantity</th>
+            <th class="right">Total</th>
+        </tr>
+        @if ( cartItemsArray.length > 0) {
+        @for (item of cartItemsArray; track $index; ) {
+        <tr>
+            <td>{{cartItemsArray[$index].caption}}</td>
+            <td class="right">{{cartItemsArray[$index].price}}.00</td>
+            <td class="right">
+                <input type="number" class="cart_qty" name="newQty" value="{{cartItemsArray[$index].quantity}}">
+            </td>
+            <td>${{cartItemsArray[$index].subTotal}}.00</td>
+        </tr>
+        }
+        }
+        <tr id="cart_footer">
+            <td class="right" colspan="3"><strong>Total:</strong></td>
+            <td class="right"><strong>${{total}}.00</strong></td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><input type="submit" name="submit" value="Update My Cart"></td>
+            <td></td>
+        </tr>
+    </table>
+</form>
+
+<p><a routerLink="/product_list">Add Item</a></p>
+<p><button (click)="emptyCart()">Empty Cart</button></p>
+<p>Proceed to: <a>Checkout</a></p>
+}

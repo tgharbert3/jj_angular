@@ -6,7 +6,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ContactService {
 
-  private contactUrl = 'https://hopper.cis.uncw.edu:5001/contact';
+  // private contactUrl = 'https://hopper.cis.uncw.edu:5001/contact';
+
+  private contactUrl = 'http://localhost:5001/contact';
 
   constructor(private http: HttpClient) { }
 
@@ -34,6 +36,5 @@ export class ContactService {
         console.error("Error in saving contact", error);
       }
     });
-    console.log(body);
   }
 }

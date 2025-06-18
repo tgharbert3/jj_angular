@@ -1,0 +1,41 @@
+#cart_header th {
+    border-bottom: 2px solid black;
+}
+
+#cart_footer td {
+    text-align: right;
+    border-top: 2px solid black;
+}
+
+/* the styles for the classes */
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+.cart_qty {
+    text-align: right;
+    width: 8em;
+}
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+    padding: 2px 4px;
+}
+
+main a:link,
+main a:visited {
+    color: #00425E;
+    border-bottom: #00425E dashed 1px;
+}
+
+a:hover,
+a:active {
+    color: #fff;
+    background-color: #00425E;
+    border-bottom: none;
+}
