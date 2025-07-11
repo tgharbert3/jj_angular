@@ -25,8 +25,6 @@ export class ViewCartComponent implements OnInit {
         this.cartItems = res.cart;
         this.cartItemsArray = Object.entries(this.cartItems).map(([id, item]) => ({ id, ...item, subTotal: item.price * item.quantity }));
         this.calculateTotal();
-        console.info(this.cartItemsArray);
-        console.log("cart loaded");
       },
       error: (error) => {
         console.error("unable to load cart:", error);
@@ -40,7 +38,6 @@ export class ViewCartComponent implements OnInit {
       this.total += item.price * item.quantity;
     });
   }
-
 
   emptyCart() {
     this.cartService.emptyCart().subscribe({

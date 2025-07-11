@@ -55,7 +55,7 @@ export class AuthService {
         return throwError(() => err);
       })
     );
-  }
+  };
 
   public logout(): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -70,5 +70,5 @@ export class AuthService {
         return throwError(() => err);
       })
     );
-  }
+  };
 }

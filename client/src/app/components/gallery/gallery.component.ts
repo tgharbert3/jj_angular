@@ -39,7 +39,8 @@ export class GalleryComponent implements OnInit {
       this.metadataList = await this.galleryService.loadMetadata();
       this.metadataList.map(file => {
         file.caption = this.galleryService.shortTitle(file.caption);
-      })
+      });
+
       this.totalPages = Math.ceil(this.metadataList.length / 6);
 
       this.route.queryParams.subscribe(params => {

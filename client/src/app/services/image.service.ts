@@ -1,6 +1,7 @@
 import { Injectable, } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { response } from 'express';
 
 export interface ImageMetadata {
   _id: string;
@@ -29,8 +30,8 @@ export class ImageService {
   constructor(private http: HttpClient) { }
 
   getAllImagesMetaData(): Observable<ImageMetadata[]> {
-    const imagesMetada = this.http.get<ImageMetadata[]>(this.metadataUrl);
-    return imagesMetada;
+    const imagesMetadata = this.http.get<ImageMetadata[]>(this.metadataUrl)
+    return imagesMetadata;
   }
 
   getImageBlob(imageId: number): Observable<Blob> {

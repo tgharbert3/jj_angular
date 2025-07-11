@@ -1,7 +1,7 @@
 import { Injectable, } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, firstValueFrom } from 'rxjs';
-import { ImageService } from './image.service';
+import { Observable, catchError, firstValueFrom, tap, of } from 'rxjs';
+import { ImageMetadata, ImageService } from './image.service';
 
 
 @Injectable({
@@ -34,6 +34,16 @@ export class GalleryService {
   loadAllThumbsFilenames() {
     return this.http.get<string[]>(`${this.allThumbURL}`);
   };
+
+  getAllImagesMetaData() {
+    this.imageService.getAllImagesMetaData().pipe(
+      tap((data: ImageMetadata[]) => { this.metadataList = data }),
+      catchError((error) => {
+        console.error(`Error in loading metadata: ${error}`)
+        return of([]);
+      })
+    ).subscribe()
+  }
 
   public async loadMetadata(): Promise<any[]> {
     try {
