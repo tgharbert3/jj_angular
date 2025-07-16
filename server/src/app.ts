@@ -16,7 +16,20 @@ const app = express();
 
 
 app.use(express.json());
-app.use(helmet());
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+                "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'"], // required for Angular dev
+                "script-src-attr": ["'self'", "'unsafe-inline'"],
+                "style-src": ["'self'", "'unsafe-inline'"], // if needed for inline styles
+                "default-src": ["'self'"],
+                "require-trusted-types-for": ["'script'"],
+            },
+        },
+    })
+);
 app.use(cors({
     origin: 'http://localhost:4200',
     credentials: true,
@@ -33,6 +46,18 @@ app.use('/thumbs', thumbsRouter);
 
 app.get('/test1', (req, res) => {
     res.send('test1');
+});
+
+app.use(express.static(path.join(__dirname, '..', 'dist', 'client', 'jj', 'browser')));
+
+app.get('/', (req, res) => {
+    const indexPath = path.join(__dirname, '..', 'dist', 'client', 'jj', 'browser', 'index.html');
+    res.sendFile(indexPath);
+});
+
+app.get('/*splat', (req, res) => {
+    const indexPath = path.join(__dirname, '..', 'dist', 'client', 'jj', 'browser', 'index.html');
+    res.sendFile(indexPath);
 });
 
 export default app;
