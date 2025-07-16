@@ -1,13 +1,13 @@
 import express from 'express';
 import { Request, NextFunction } from 'express';
-import { pageParam } from '../types';
+import { PageParam } from '../types';
 
 const galleryRouter = express.Router();
 
 /**
  * /load enpoint that takes in a page number query param and fetches all the filenames for that page
  */
-galleryRouter.get('/load', async (req: Request<pageParam>, res, next: NextFunction) => {
+galleryRouter.get('/load', async (req: Request<PageParam>, res, next: NextFunction) => {
     try {
         const pageParamater = req.query.page;
         const page = typeof pageParamater === 'string' ? parseInt(pageParamater, 10) : 1;

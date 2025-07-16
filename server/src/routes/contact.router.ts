@@ -1,9 +1,9 @@
 import express, { NextFunction, Request } from 'express';
-import { contactParam } from '../types';
+import { ContactParam } from '../types';
 
 const contactRouter = express.Router();
 
-contactRouter.post('/', async (req: Request<{}, {}, contactParam>, res, next: NextFunction) => {
+contactRouter.post('/', async (req: Request<{}, {}, ContactParam>, res, next: NextFunction) => {
     try {
         const contactData = req.body;
         // const newContact = await contactController();

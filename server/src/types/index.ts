@@ -1,8 +1,8 @@
-export interface pageParam {
+export interface PageParam {
     pageNumber: number;
 };
 
-export interface contactParam {
+export interface ContactParam {
     name: String,
     email: String,
     comments: String,
@@ -15,3 +15,15 @@ export interface contactParam {
     travel: Boolean,
     hear: String,
 };
+
+export interface ImageIdRouteParam {
+    image_id: string;
+}
+
+export interface ImageMetadata {
+    image_id: Number,
+    filename: String,
+    caption: String,
+    price: Number,
+    details: String,
+}
