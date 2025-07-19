@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const { thumbsSchema } = require('../schema/thumbs.schema.js');
-const path = require('path');
+import mongoose from 'mongoose';
+import thumbsSchema from '../schema/thumbs.schema';
+import path from 'path';
 
 const thumbsModel = mongoose.models.thumbs || mongoose.model('thumbs', thumbsSchema);
 
@@ -9,20 +9,22 @@ async function getAllFilenameFromMongo() {
         const thumbs = await thumbsModel.find();
         const filenames = thumbs.map(thumb => thumb.filename);
         return filenames
-    } catch (error) {
-        throw new Error(`Database error from Thumbs: ${error.message}`)
+    } catch (error: unknown) {
+        if (error instanceof Error)
+            throw new Error(`Database error: ${error.message}`);
     }
 }
 
-async function loadFilenamesFromMongoByPage(page, pageSize) {
+async function loadFilenamesFromMongoByPage(page: number, pageSize: number) {
     try {
         const thumbs = await thumbsModel.find()
             .skip((page - 1) * pageSize)
             .limit(pageSize)
         const filenames = thumbs.map(thumb => thumb.filename);
         return filenames;
-    } catch (error) {
-        throw new Error(`Database error from by page: ${error.message}`)
+    } catch (error: unknown) {
+        if (error instanceof Error)
+            throw new Error(`mongo error: ${error.message}`);
     }
 }
 
@@ -31,7 +33,7 @@ async function loadFilenamesFromMongoByPage(page, pageSize) {
  * @param {string} filename of file to fetch
  * @returns {file} of thumb file from server
  */
-async function getThumbFromServer(filename) {
+async function getThumbFromServer(filename: string) {
 
     try {
         const thumb = path.join(__dirname, '..', 'assets', 'thumbs', `${filename}`);

@@ -7,16 +7,17 @@ const { loadFilenamesFromMongoByPage, getThumbFromServer } = require('../service
  * @param {number} page
  * @returns {Array} of thumbs files 
  */
-async function loadThumbs(page) {
+export async function loadThumbs(page: number) {
     try {
         const filenames = await getFilenamesByPages(page);
         return filenames;
-    } catch (error) {
-        throw new Error(`Gallery Controller Error at get Thumbs: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error)
+            throw new Error(`Load thumbs error: ${error.message}`);
     }
 }
 
-async function getFilenamesByPages(page) {
+export async function getFilenamesByPages(page: number) {
 
     try {
         if (page <= 0) {
@@ -24,13 +25,11 @@ async function getFilenamesByPages(page) {
         }
         const LIMIT = 6;
 
-        const start = (page - 1) * LIMIT;
-        const end = start + LIMIT;
-
         const thumbs = await loadFilenamesFromMongoByPage(page, LIMIT);
         return thumbs
-    } catch (error) {
-        throw new Error(`Gallery Controller Error: ${error.message}`);
+    } catch (error: unknown) {
+        if (error instanceof Error)
+            throw new Error(`Getfilenames error: ${error.message}`);
     }
 };
 
@@ -40,7 +39,7 @@ async function getFilenamesByPages(page) {
  * @param {string} filename file to be retrieved
  * @returns thumb file from the server
  */
-async function getThumb(filename) {
+export async function getThumb(filename: string) {
     try {
         const thumbFile = await getThumbFromServer(filename);
         return thumbFile;

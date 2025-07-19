@@ -1,6 +1,7 @@
 import express from 'express';
 import { Request, NextFunction } from 'express';
 import { PageParam } from '../types';
+import { loadThumbs, getThumb } from '../controllers/gallery.controller';
 
 const galleryRouter = express.Router();
 
@@ -14,8 +15,8 @@ galleryRouter.get('/load', async (req: Request<PageParam>, res, next: NextFuncti
         if (isNaN(page)) {
             return next(new Error("Page must be a string represetning a valid number"));
         }
-        //const filenames = await loadThumbs(page);
-        res.status(200).json(page);
+        const filenames = await loadThumbs(page);
+        res.status(200).json(filenames);
     } catch (error) {
         next(error);
     };
@@ -25,12 +26,13 @@ galleryRouter.get('/load', async (req: Request<PageParam>, res, next: NextFuncti
  * Endpoint for fetching indiviual thumb from the server. Takes in a file name and returns that file from the server.
  */
 galleryRouter.get('/thumb', async (req, res, next: NextFunction) => {
+    const fileParamater = req.query.filename;
+    if (!(typeof fileParamater === 'string')) {
+        return res.status(400).json({ error: "Invalid filename" });
+    }
     try {
-        const fileParamater = req.query.filename;
-        const filename = typeof fileParamater === 'string';
-        //const thumbfile = await getThumb(filename);
-        // res.sendFile(thumbFile);
-        res.status(200).json({ message: "filesent" });
+        const thumbfile = await getThumb(fileParamater);
+        res.sendFile(thumbfile);
     } catch (error) {
         next(error);
     };
