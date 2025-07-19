@@ -30,8 +30,13 @@ galleryRouter.get('/thumb', async (req, res, next: NextFunction) => {
     if (!(typeof fileParamater === 'string')) {
         return res.status(400).json({ error: "Invalid filename" });
     }
+
+
     try {
         const thumbfile = await getThumb(fileParamater);
+        if (!thumbfile) {
+            return res.status(404).json({ error: "Image not found" });
+        }
         res.sendFile(thumbfile);
     } catch (error) {
         next(error);

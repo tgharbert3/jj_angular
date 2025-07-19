@@ -16,8 +16,6 @@ contactRouter.post('/', async (req: Request<{}, {}, ContactParam>, res, next: Ne
     } catch (error) {
         next(error);
     }
-
-
 })
 
 export default contactRouter;

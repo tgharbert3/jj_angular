@@ -11,7 +11,6 @@ import galleryRouter from "./routes/gallery.router";
 import loginRouter from "./routes/login.router";
 import logoutRouter from "./routes/logout.router";
 import registerRouter from "./routes/register.router";
-import thumbsRouter from "./routes/thumbs.router";
 
 const app = express();
 
@@ -45,7 +44,7 @@ app.use('/gallery', galleryRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/register', registerRouter);
-app.use('/thumbs', thumbsRouter);
+
 
 app.use(express.static(path.join(__dirname, '..', 'dist', 'client', 'jj', 'browser')));
 

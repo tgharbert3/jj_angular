@@ -4,7 +4,7 @@ import path from 'path';
 
 const thumbsModel = mongoose.models.thumbs || mongoose.model('thumbs', thumbsSchema);
 
-async function getAllFilenameFromMongo() {
+export async function getAllFilenameFromMongo() {
     try {
         const thumbs = await thumbsModel.find();
         const filenames = thumbs.map(thumb => thumb.filename);
@@ -15,7 +15,7 @@ async function getAllFilenameFromMongo() {
     }
 }
 
-async function loadFilenamesFromMongoByPage(page: number, pageSize: number) {
+export async function loadFilenamesFromMongoByPage(page: number, pageSize: number) {
     try {
         const thumbs = await thumbsModel.find()
             .skip((page - 1) * pageSize)
@@ -33,7 +33,7 @@ async function loadFilenamesFromMongoByPage(page: number, pageSize: number) {
  * @param {string} filename of file to fetch
  * @returns {file} of thumb file from server
  */
-async function getThumbFromServer(filename: string) {
+export async function getThumbFromServer(filename: string) {
 
     try {
         const thumb = path.join(__dirname, '..', 'assets', 'thumbs', `${filename}`);
@@ -42,7 +42,4 @@ async function getThumbFromServer(filename: string) {
     catch (error) {
         console.error("Error in loading thumb from server", error);
     }
-
 }
-
-module.exports = { getAllFilenameFromMongo, loadFilenamesFromMongoByPage, getThumbFromServer };

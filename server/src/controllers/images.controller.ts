@@ -16,7 +16,7 @@ export async function getImage(image_id: number) {
         const image = await getImageFromServer(filename);
         return image;
     } catch (error) {
-        throw new Error("Invalid image id");
+        throw new Error(`Invalid image id: ${error} `);
     }
 };
 
@@ -29,7 +29,7 @@ export async function getAllImagesMetadata() {
         const metadata = await getImagesMetaData();
         return metadata;
     } catch (error) {
-        throw new Error("Could not get all images metadata.");
+        throw new Error(`Could not get all images metadata: ${error}`);
     }
 }
 

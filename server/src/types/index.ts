@@ -3,17 +3,17 @@ export interface PageParam {
 };
 
 export interface ContactParam {
-    name: String,
-    email: String,
-    comments: String,
-    subscribe: String,
-    anime: Boolean,
-    arts: Boolean,
-    judo: Boolean,
-    lang: Boolean,
-    sci: Boolean,
-    travel: Boolean,
-    hear: String,
+    name: string,
+    email: string,
+    comments: string,
+    subscribe: string,
+    anime: boolean,
+    arts: boolean,
+    judo: boolean,
+    lang: boolean,
+    sci: boolean,
+    travel: boolean,
+    hear: string,
 };
 
 export interface ImageIdRouteParam {
@@ -21,16 +21,16 @@ export interface ImageIdRouteParam {
 };
 
 export interface UserSchema {
-    firstName: String,
-    lastName: String,
-    email: String,
-    password: String,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
 }
 
 export interface ImageMetadata {
-    image_id: Number,
-    filename: String,
-    caption: String,
-    price: Number,
-    details: String,
+    image_id: number,
+    filename: string,
+    caption: string,
+    price: number,
+    details: string,
 };

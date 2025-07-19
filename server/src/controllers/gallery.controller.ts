@@ -1,5 +1,4 @@
-const { loadFilenamesFromMongoByPage, getThumbFromServer } = require('../services/thumbs.service');
-
+import { loadFilenamesFromMongoByPage, getThumbFromServer } from '../services/thumbs.service';
 
 /**
  * Main function for getting thumbs. Takes in a page number, gets the filenames from the db, then gets the files from
