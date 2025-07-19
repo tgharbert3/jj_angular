@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import { getAllThumbs } from '../controllers/thumbs.controller'
+
 const thumbsRouter = express.Router();
-const getAllThumbs = require('../controllers/thumbs.controller')
 
 thumbsRouter.get('/load', async (req, res) => {
     try {
@@ -11,4 +12,4 @@ thumbsRouter.get('/load', async (req, res) => {
     }
 });
 
-module.exports = thumbsRouter;
+export default thumbsRouter;

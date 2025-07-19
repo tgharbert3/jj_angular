@@ -1,13 +1,10 @@
-const { getAllFilenameFromMongo } = require('../services/thumbs.service');
+import { getAllFilenameFromMongo } from "../services/thumbs.service";
 
-const getAllThumbs = async () => {
+export async function getAllThumbs() {
     try {
-
         const filenmaes = await getAllFilenameFromMongo();
         return filenmaes;
     } catch (error) {
         return "Failed to get thumbs";
     }
 }
-
-module.exports = getAllThumbs;
