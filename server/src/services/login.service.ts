@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { userSchema } = require('../schema/user.schema')
+import mongoose from 'mongoose';
+import userSchema from '../schema/user.schema';
 
 const userModel = mongoose.models.User || mongoose.model('User', userSchema);
 
@@ -8,7 +8,7 @@ const userModel = mongoose.models.User || mongoose.model('User', userSchema);
  * @param {string} email 
  * @returns User object or Null
  */
-async function fetchUserByEmail(email) {
+export async function fetchUserByEmail(email: string) {
 
     try {
         const user = await userModel.findOne({ email: email });
@@ -23,5 +23,3 @@ async function fetchUserByEmail(email) {
         throw error;
     }
 }
-
-module.exports = { fetchUserByEmail }

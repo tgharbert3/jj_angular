@@ -1,5 +1,5 @@
-const { fetchUserByEmail } = require('../services/login.service');
-const argon2 = require('argon2');
+import { fetchUserByEmail } from "../services/login.service";
+import argon2 from 'argon2';
 
 /**
  * Controller function to verify user information
@@ -7,13 +7,12 @@ const argon2 = require('argon2');
  * @param {string} password 
  * @returns user or null
  */
-async function loginUserController(email, password) {
+export async function loginUserController(email: string, password: string) {
     try {
         const userFromDB = await fetchUserByEmail(email);
         if (userFromDB) {
             const matched = await verifyPassword(password, userFromDB.password)
             if (matched) {
-                //start session and return
                 return userFromDB;
             }
         } else {
@@ -31,7 +30,7 @@ async function loginUserController(email, password) {
  * @param {string} dbPassword 
  * @returns boolean 
  */
-async function verifyPassword(inputPassword, dbPassword) {
+async function verifyPassword(inputPassword: string, dbPassword: string) {
     try {
         if (await argon2.verify(dbPassword, inputPassword)) {
             return true;
@@ -42,8 +41,4 @@ async function verifyPassword(inputPassword, dbPassword) {
         console.error("Password verification failed", error);
         return false;
     }
-}
-
-module.exports = {
-    loginUserController,
 }
