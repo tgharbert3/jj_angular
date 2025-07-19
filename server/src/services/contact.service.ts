@@ -1,9 +1,19 @@
-const mongoose = require('mongoose');
-const { contactSchema } = require('../schema/contact.schema')
+import mongoose from "mongoose";
+import contactSchema from "../schema/contact.schema";
 
 const contactModel = mongoose.models.contact || mongoose.model('contact', contactSchema);
 
-async function insertContact(name, email, comments, subscribe, anime, arts, judo, lang, sci, travel, hear) {
+async function insertContact(name: string,
+    email: string,
+    comments: string,
+    subscribe: boolean,
+    anime: boolean,
+    arts: boolean,
+    judo: boolean,
+    lang: boolean,
+    sci: boolean,
+    travel: boolean,
+    hear: string) {
     try {
 
         const newContact = await contactModel.create({
@@ -30,4 +40,4 @@ async function insertContact(name, email, comments, subscribe, anime, arts, judo
     }
 }
 
-module.exports = { insertContact };
+export default insertContact;

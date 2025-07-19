@@ -6,7 +6,7 @@ export interface ContactParam {
     name: string,
     email: string,
     comments: string,
-    subscribe: string,
+    subscribe: boolean,
     anime: boolean,
     arts: boolean,
     judo: boolean,
