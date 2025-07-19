@@ -1,5 +1,5 @@
-const { insertNewUser } = require('../services/register.service');
-const argon2 = require('argon2');
+import { insertNewUser } from '../services/register.service';
+import argon2 from 'argon2';
 
 /**
  * Controller function for inserting a new user
@@ -9,7 +9,7 @@ const argon2 = require('argon2');
  * @param {string} password 
  * @returns {object} user object
  */
-async function insertNewUserController(firstName, lastName, email, password) {
+export async function insertNewUserController(firstName: string, lastName: string, email: string, password: string) {
     try {
 
         const hashedPassword = await hashPassword(password);
@@ -30,7 +30,7 @@ async function insertNewUserController(firstName, lastName, email, password) {
  * @param {string} password 
  * @returns {string} hased password
  */
-async function hashPassword(password) {
+async function hashPassword(password: string) {
 
     try {
         const hashedPassword = await argon2.hash(password);
@@ -39,6 +39,4 @@ async function hashPassword(password) {
         throw new Error("Couldnt has password");
     }
 }
-
-module.exports = { insertNewUserController };
 

@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const { subscribe } = require('../routes/contact.router');
+import mongoose from "mongoose";
 
 const contactSchema = new mongoose.Schema({
     name: String,
@@ -15,4 +14,4 @@ const contactSchema = new mongoose.Schema({
     hear: String,
 })
 
-module.exports = { contactSchema }
+export default contactSchema

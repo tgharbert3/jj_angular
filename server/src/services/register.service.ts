@@ -1,5 +1,7 @@
-const mongoose = require('mongoose');
-const { userSchema } = require('../schema/user.schema')
+import mongoose from "mongoose";
+import userSchema from "../schema/user.schema";
+
+
 
 const userModel = mongoose.models.User || mongoose.model('User', userSchema);
 
@@ -11,7 +13,7 @@ const userModel = mongoose.models.User || mongoose.model('User', userSchema);
  * @param {string} hashedPassword 
  * @returns {object} newUser
  */
-async function insertNewUser(firstName, lastName, email, hashedPassword) {
+export async function insertNewUser(firstName: string, lastName: string, email: string, hashedPassword: string) {
 
     try {
         const newUser = await userModel.create({
@@ -32,6 +34,3 @@ async function insertNewUser(firstName, lastName, email, hashedPassword) {
     }
 }
 
-module.exports = {
-    insertNewUser,
-}
