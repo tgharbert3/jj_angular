@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const imageSchema = new mongoose.Schema({
     image_id: Number,
@@ -8,4 +8,4 @@ const imageSchema = new mongoose.Schema({
     details: String,
 });
 
-module.exports = { imageSchema };
+export default imageSchema;

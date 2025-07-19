@@ -17,7 +17,14 @@ export interface ContactParam {
 };
 
 export interface ImageIdRouteParam {
-    image_id: string;
+    id: string;
+};
+
+export interface UserSchema {
+    firstName: String,
+    lastName: String,
+    email: String,
+    password: String,
 }
 
 export interface ImageMetadata {
@@ -26,4 +33,4 @@ export interface ImageMetadata {
     caption: String,
     price: Number,
     details: String,
-}
+};

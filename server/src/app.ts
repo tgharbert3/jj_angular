@@ -2,6 +2,7 @@ import express from "express";
 import helmet from "helmet";
 import cors from 'cors';
 import path from "path";
+import { mongoConnect } from './config'
 
 import imagesRouter from './routes/images.router';
 import cartRouter from "./routes/cart.router";
@@ -14,6 +15,8 @@ import thumbsRouter from "./routes/thumbs.router";
 
 const app = express();
 
+//Establish connection to mongodb;
+mongoConnect();
 
 app.use(express.json());
 app.use(
@@ -43,10 +46,6 @@ app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/register', registerRouter);
 app.use('/thumbs', thumbsRouter);
-
-app.get('/test1', (req, res) => {
-    res.send('test1');
-});
 
 app.use(express.static(path.join(__dirname, '..', 'dist', 'client', 'jj', 'browser')));
 
