@@ -3,6 +3,7 @@ import helmet from "helmet";
 import cors from 'cors';
 import path from "path";
 import { mongoConnect } from './config'
+import cookieParser from 'cookie-parser';
 
 
 import imagesRouter from './routes/images.router';
@@ -45,7 +46,10 @@ app.use(
 app.use(cors({
     origin: 'http://localhost:4200',
     credentials: true,
+
 }));
+
+app.use(cookieParser());
 
 app.use('/images', imagesRouter);
 app.use('/cart', cartRouter);

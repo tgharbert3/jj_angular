@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { body, validationResult } from 'express-validator';
 
 import { loginUserController } from '../controllers/login.controller';
+import { generateAccessToken } from '../middleware/auth.middleware';
 
 const loginRouter = express.Router();
 
@@ -31,14 +32,16 @@ loginRouter.post('/', [
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        // if (req.session.user) {
-        //     return res.status(200).json({ message: 'Already logged in', firstName: req.session.user.firstName });
-        // }
         const user = await loginUserController(req.body.email, req.body.password);
 
         if (user) {
-            // req.session.user = { id: user.id, email: user.email, firstName: user.firstName };
-            // req.session.cart = {};
+            const token = generateAccessToken(user.email);
+            res.cookie('accessToken', token, {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'lax',
+                maxAge: 1000 * 60 * 60,
+            });
             res.status(200).json({
                 firstName: user.firstName,
             });
