@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { body, validationResult } from 'express-validator'
 
 import { insertNewUserController } from '../controllers/register.controller';
+import { generateAccessToken } from "../middleware/auth.middleware";
 
 const registerRouter = express.Router();
 
@@ -61,8 +62,13 @@ registerRouter.post('/', [
     try {
         const newUser = await insertNewUserController(req.body.firstName, req.body.lastName, req.body.email, req.body.password);
         if (newUser) {
-            // req.session.user = { id: newUser.id, email: newUser.email }
-            // req.session.cart = {};
+            const token = generateAccessToken(newUser.email);
+            res.cookie('accessToken', token, {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'lax',
+                maxAge: 1000 * 60 * 60,
+            });
             res.status(200).json({
                 firstName: newUser.firstName,
                 lastName: newUser.lastName,
