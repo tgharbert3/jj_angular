@@ -4,6 +4,7 @@ import cors from 'cors';
 import path from "path";
 import { mongoConnect } from './config'
 
+
 import imagesRouter from './routes/images.router';
 import cartRouter from "./routes/cart.router";
 import contactRouter from "./routes/contact.router";
@@ -14,6 +15,14 @@ import registerRouter from "./routes/register.router";
 import thumbsRouter from "./routes/thumbs.router";
 
 const app = express();
+
+if (!process.env.SESSION_KEY) {
+    throw new Error("No session key");
+}
+
+if (!process.env.ATLAS_URI_PERSONAL) {
+    throw new Error("No atlas Uri");
+}
 
 //Establish connection to
 mongoConnect();
