@@ -35,9 +35,9 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
   // private addToCartUrl = 'https://hopper.cis.uncw.edu:5001/cart/add';
-  private addToCartUrl = 'http://localhost:5001/cart/add';
-  private getCartUrl = 'http://localhost:5001/cart';
-  private emptyCartUrl = 'http://localhost:5001/cart/empty';
+  private addToCartUrl = 'https://localhost:5001/cart/add';
+  private getCartUrl = 'https://localhost:5001/cart';
+  private emptyCartUrl = 'https://localhost:5001/cart/empty';
 
   currentCart: CartItem[] = [];
 

@@ -15,24 +15,24 @@ export class GalleryService {
   // private thumbImageUrl = 'https://hopper.cis.uncw.edu:5001/gallery/thumb?filename=';
   // private allThumbURL = 'https://hopper.cis.uncw.edu:5001/thumbs/load';
 
-  private thumbsUrlPageBase = 'http://localhost:5001/gallery/load?page=';
-  private thumbImageUrl = 'http://localhost:5001/gallery/thumb?filename=';
-  private allThumbURL = 'http://localhost:5001/thumbs/load';
+  private thumbsUrlPageBase = 'https://localhost:5001/gallery/load?page=';
+  private thumbImageUrl = 'https://localhost:5001/gallery/thumb?filename=';
+  private allThumbURL = 'https://localhost:5001/thumbs/load';
 
   constructor(private http: HttpClient, private imageService: ImageService) {
   }
 
   loadThumbFilenamesByPage(pageNumber: number): Observable<string[]> {
-    return this.http.get<string[]>(`${this.thumbsUrlPageBase}${pageNumber}`);
+    return this.http.get<string[]>(`${this.thumbsUrlPageBase}${pageNumber}`, { withCredentials: true });
   }
 
   getThumbBlob(filename: string): Observable<Blob> {
-    const image = this.http.get(`${this.thumbImageUrl}${filename}`, { responseType: 'blob' })
+    const image = this.http.get(`${this.thumbImageUrl}${filename}`, { responseType: 'blob', withCredentials: true })
     return image
   }
 
   loadAllThumbsFilenames() {
-    return this.http.get<string[]>(`${this.allThumbURL}`);
+    return this.http.get<string[]>(`${this.allThumbURL}`, { withCredentials: true });
   };
 
   getAllImagesMetaData() {

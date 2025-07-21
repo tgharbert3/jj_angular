@@ -12,9 +12,9 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = 'http://localhost:5001/login';
-  private registerUrl = 'http://localhost:5001/register';
-  private logoutUrl = 'http://localhost:5001/logout';
+  private loginUrl = 'https://localhost:5001/login';
+  private registerUrl = 'https://localhost:5001/register';
+  private logoutUrl = 'https://localhost:5001/logout';
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
