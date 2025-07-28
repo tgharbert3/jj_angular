@@ -15,6 +15,13 @@ const config: Config = {
             useESM: true,
         },
     },
+    collectCoverage: true,
+    reporters: ['default'],
+    coverageDirectory: 'coverage',
+    coverageReporters: ['text-summary', 'lcov'],
+    collectCoverageFrom: ['src/**/*.{js,ts}',       // Adjust to your source files
+        '!src/**/*.d.ts',         // Ignore type declarations
+        '!src/tests/**',],
 };
 
 export default config;

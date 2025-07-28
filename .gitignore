@@ -4,4 +4,5 @@
 /deprecated/
 .keys/
 todos.txt
-notes.txt
+notes.txta
+server/coverage/

@@ -1,0 +1,24 @@
+TODOs:
+    Research and initalize github actions for testing
+    Refactor users to use postgres sql.
+    While refactoring users, perform unit and integration tests.
+    This is where normal unit/integartion tests begin.
+    Once refactoring is completed, finish implmenting the token auth to use refresh tokens with rotation and resuse detection.
+    Unit and integartion test all current features. 
+    Once all tests pass, begin implmenting the blog feature.
+    After all tests pass, including E2E and manual, for the current state and the blog feature, look into deploying the app.
+    After deployed set up a full CI/CD pipeline to implment the cart feature. 
+
+
+Plans for testing:
+    have a YAML file that is for unit and intigrtion testing. If tests pass, then have them in a staging branch that is waiting for manual
+    and E2E testing.
+
+
+Thoughts:
+    Need to test unit and component test angular app.
+    Possible redis integration for carts and blog.
+    Use Docker 
+
+COMPLETED: 
+    Rebase main the main branch to refactor branch: COMPLETED ON 07/28/25
