@@ -25,7 +25,7 @@ if (!process.env.ATLAS_URI_PERSONAL) {
     throw new Error("No atlas Uri");
 }
 
-//Establish connection to
+//Establish connection to mongo db
 mongoConnect();
 
 app.use(express.json());

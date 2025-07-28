@@ -3,3 +3,5 @@
 *.tsbuildinfo
 /deprecated/
 .keys/
+todos.txt
+notes.txt
