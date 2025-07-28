@@ -1,36 +1,23 @@
-import mongoose from "mongoose";
-import userSchema from "../schema/user.schema";
-
-
-
-const userModel = mongoose.models.User || mongoose.model('User', userSchema);
+import { db } from '../config';
 
 /**
- * Inserts a new user into mongoDB
+ * Inserts a new user into postgres
  * @param {string} firstName 
  * @param {string} lastName 
  * @param {string} email 
  * @param {string} hashedPassword 
  * @returns {object} newUser
  */
-export async function insertNewUser(firstName: string, lastName: string, email: string, hashedPassword: string) {
-
+export async function insertNewUser(firstName: string, lastName: string, email: string, password: string) {
     try {
-        const newUser = await userModel.create({
-            firstName,
-            lastName,
-            email,
-            password: hashedPassword
-        });
-        if (newUser) {
-            return newUser
-        } else {
-            return null;
-        }
-
+        const newUser = await db.one(`INSERT INTO users.jj_users (firstName, lastName, email, password)
+            VALUES ($1, $2, $3, $4)
+            RETURNING *`,
+            [firstName, lastName, email, password]);
+        return newUser;
     } catch (error) {
-        console.error('Error inserting new user:', error);
+        console.error(error);
         throw error;
     }
-}
+};
 

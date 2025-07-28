@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import pgPromise from 'pg-promise';
 
 dotenv.config();
 
@@ -8,6 +9,13 @@ interface Config {
     nodeEnv: string;
     mongoURI: string;
 };
+
+if (!process.env.POSTGRES_CONN_STRING) {
+    throw new Error("Not connection String");
+}
+const pgp = pgPromise();
+export const db = pgp(process.env.POSTGRES_CONN_STRING);
+
 
 const config: Config = {
     port: Number(process.env.PORT) || 3000,
