@@ -2,7 +2,6 @@ import express from "express";
 import helmet from "helmet";
 import cors from 'cors';
 import path from "path";
-import { mongoConnect } from './config'
 import cookieParser from 'cookie-parser';
 
 
@@ -14,6 +13,7 @@ import loginRouter from "./routes/login.router";
 import logoutRouter from "./routes/logout.router";
 import registerRouter from "./routes/register.router";
 import thumbsRouter from "./routes/thumbs.router";
+import { errorHandler } from "./middleware/error.middleware";
 
 const app = express();
 
@@ -24,9 +24,6 @@ if (!process.env.SESSION_KEY) {
 if (!process.env.ATLAS_URI_PERSONAL) {
     throw new Error("No atlas Uri");
 }
-
-//Establish connection to mongo db
-mongoConnect();
 
 app.use(express.json());
 app.use(
@@ -71,5 +68,7 @@ app.get('/*splat', (req, res) => {
     const indexPath = path.join(__dirname, '..', 'dist', 'client', 'jj', 'browser', 'index.html');
     res.sendFile(indexPath);
 });
+
+app.use(errorHandler);
 
 export default app;

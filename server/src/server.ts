@@ -3,11 +3,15 @@ import app from "./app";
 import https from 'https';
 import fs from 'fs';
 import path from "path";
+import { mongoConnect } from './config'
 
 const options = {
     key: fs.readFileSync(path.join(__dirname, '..', '.keys', 'server.key')),
     cert: fs.readFileSync(path.join(__dirname, '..', '.keys', 'server.cert')),
 }
+
+//Establish connection to mongo db
+mongoConnect();
 
 https.createServer(options, app).listen(config.port, () => {
     console.log(`App listening on port ${config.port}`);

@@ -10,6 +10,9 @@ const imagesRouter = express.Router();
 imagesRouter.get('/metadata', async (req, res, next: NextFunction) => {
     try {
         const metadata = await getAllImagesMetadata();
+        if (!metadata) {
+            return res.status(404).json({ message: "Image not found" });
+        }
         res.status(200).json(metadata);
     } catch (error) {
         next(error);
