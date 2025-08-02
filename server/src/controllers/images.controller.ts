@@ -6,17 +6,23 @@ import { findImagebyId, getImagesMetaData, getImageFromServer } from '../service
  * @returns the image file
  */
 export async function getImage(image_id: number) {
-    if (!validateImageId) {
-        throw new Error("Invalid image id");
+    if (!validateImageId(image_id)) {
+        console.info("Not a valid Image id");
+        return null;
     }
 
     try {
         const imageInfo = await findImagebyId(image_id);
+        if (!imageInfo) {
+            console.info('No image matching that Id', image_id);
+            return null
+        }
         const filename = imageInfo.filename;
         const image = await getImageFromServer(filename);
         return image;
     } catch (error) {
-        throw new Error(`Invalid image id: ${error} `);
+        console.error("Failed to get image: ", error);
+        throw error;
     }
 };
 
@@ -39,5 +45,5 @@ export async function getAllImagesMetadata() {
  * @returns boolean based on if it is a valid number
  */
 function validateImageId(image_id: number) {
-    return typeof image_id === 'number' && Number.isFinite(image_id);
+    return typeof image_id === 'number' && Number.isFinite(image_id) && image_id > 0;
 }

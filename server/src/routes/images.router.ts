@@ -27,18 +27,16 @@ imagesRouter.get('/:id', async (req: Request<ImageIdRouteParam>, res, next: Next
     const imageId = parseInt(imageIdParam, 10);
     if (isNaN(imageId)) {
         return res.status(400).json({ error: "Invalid image ID" });
-    }
-
+    };
     try {
-
         const imagepath = await getImage(imageId);
         if (!imagepath) {
             return res.status(404).json({ error: "Image not found" });
-        }
+        };
         res.sendFile(imagepath);
     } catch (error) {
         next(error);
-    }
+    };
 });
 
 export default imagesRouter;
