@@ -6,13 +6,13 @@ import cookieParser from 'cookie-parser';
 
 
 import imagesRouter from './routes/images.router';
-import cartRouter from "./routes/cart.router";
 import contactRouter from "./routes/contact.router";
 import galleryRouter from "./routes/gallery.router";
 import loginRouter from "./routes/login.router";
 import logoutRouter from "./routes/logout.router";
 import registerRouter from "./routes/register.router";
 import thumbsRouter from "./routes/thumbs.router";
+import blogRouter from "./routes/blog.router";
 import { errorHandler } from "./middleware/error.middleware";
 
 const app = express();
@@ -49,7 +49,7 @@ app.use(cors({
 app.use(cookieParser());
 
 app.use('/images', imagesRouter);
-app.use('/cart', cartRouter);
+app.use('/blog', blogRouter);
 app.use('/contact', contactRouter);
 app.use('/gallery', galleryRouter);
 app.use('/login', loginRouter);
