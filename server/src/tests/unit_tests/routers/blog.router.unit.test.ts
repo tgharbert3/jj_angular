@@ -22,7 +22,7 @@ describe('Unit Test for blog router', () => {
             }
         ]);
 
-        const response = await request(app).get('/blog/getAllPosts');
+        const response = await request(app).get('/blog/getAllPosts/1');
         expect(response.status).toEqual(200);
         expect(response.body).toMatchObject([
             {
@@ -38,7 +38,7 @@ describe('Unit Test for blog router', () => {
     it('Should return 404 and message', async () => {
         mockGetAllPosts.mockReturnValueOnce(null);
 
-        const response = await request(app).get('/blog/getAllPosts');
+        const response = await request(app).get('/blog/getAllPosts/1');
         expect(response.status).toEqual(404);
         expect(response.body.message).toMatch("No posts found");
         expect(mockGetAllPosts).toHaveBeenCalledTimes(1);
@@ -48,9 +48,16 @@ describe('Unit Test for blog router', () => {
     it('Should return 500', async () => {
         mockGetAllPosts.mockRejectedValueOnce(new Error('Could not get all posts'));
 
-        const response = await request(app).get('/blog/getAllPosts');
+        const response = await request(app).get('/blog/getAllPosts/1');
         expect(response.status).toEqual(500);
         expect(response.body.message).toMatch('Could not get all posts');
         expect(mockGetAllPosts).toHaveBeenCalledTimes(1);
     });
+
+    it("Should return 404", async () => {
+
+        const response = await request(app).get('/blog/getAllPosts/t');
+        expect(response.status).toEqual(404);
+        expect(response.body.error).toMatch("Invalid user ID");
+    })
 })

@@ -15,7 +15,7 @@ blogRouter.get('/getAllPosts/:userID', async (req, res, next: NextFunction) => {
     const param = req.params.userID
     const user_id = parseInt(param, 10)
     if (isNaN(user_id)) {
-        return res.status(400).json({ error: "Invalid user ID" });
+        return res.status(404).json({ error: "Invalid user ID" });
     }
     try {
         const posts = await getAllPosts(user_id);

@@ -1,4 +1,5 @@
 import { findImagebyId, getImagesMetaData, getImageFromServer } from '../services/images.service';
+import { validateNumber } from '../middleware/shared';
 
 /**
  * fetches the image
@@ -6,7 +7,7 @@ import { findImagebyId, getImagesMetaData, getImageFromServer } from '../service
  * @returns the image file
  */
 export async function getImage(image_id: number) {
-    if (!validateImageId(image_id)) {
+    if (!validateNumber(image_id)) {
         console.info("Not a valid Image id");
         return null;
     }
@@ -37,13 +38,4 @@ export async function getAllImagesMetadata() {
     } catch (error) {
         throw new Error(`Could not get all images metadata: ${error}`);
     }
-}
-
-/**
- * validates that the image id is a number
- * @param image_id the image id to fetch
- * @returns boolean based on if it is a valid number
- */
-function validateImageId(image_id: number) {
-    return typeof image_id === 'number' && Number.isFinite(image_id) && image_id > 0;
 }

@@ -1,4 +1,5 @@
 import { getAllPostsFromDB } from "../services/blog.service";
+import { validateNumber } from "../middleware/shared";
 
 /**
  * controller function to fetch all the posts
@@ -7,6 +8,11 @@ import { getAllPostsFromDB } from "../services/blog.service";
  * Author: tgh
  */
 export async function getAllPosts(userID: number) {
+    if (!validateNumber(userID)) {
+        console.info("Not a valid Image id");
+        return null;
+    }
+
     try {
         const posts = await getAllPostsFromDB(userID);
         if (posts.length === 0) {
