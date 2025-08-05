@@ -2,7 +2,8 @@ jest.mock('../../../config');
 
 import { db } from "../../../config";
 import dotenv from 'dotenv';
-import { getAllPostsFromDB } from "../../../services/blog.service";
+import { getAllPostsFromDB, addPostToDb } from "../../../services/blog.service";
+import { mock } from "node:test";
 
 
 describe('Unit tests for blog service', () => {
@@ -43,5 +44,35 @@ describe('Unit tests for blog service', () => {
         expect(mockDB).toHaveBeenCalledTimes(1);
     });
 
-})
+});
+
+describe('Tests the add serive', () => {
+    const mockDB = db.one as jest.Mock;
+
+    afterEach(() => {
+        jest.clearAllMocks;
+    })
+
+    /**Tests under the normal operation */
+    it('Should return the object that was added', async () => {
+        mockDB.mockResolvedValueOnce({
+            postId: 1,
+        }
+        );
+
+        const userId = 1;
+        const fileName = '';
+        const postText = 'This is the first post';
+        const newPost = await addPostToDb(postText, fileName, userId);
+        expect(newPost).toMatchObject(
+            {
+                postId: 1,
+            }
+        );
+        expect(mockDB).toHaveBeenCalledTimes(1);
+    });
+
+    /**Tests the catch block */
+    it.skip('Should throw an error', () => { })
+});
 

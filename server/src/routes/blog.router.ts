@@ -1,15 +1,30 @@
 import express, { NextFunction } from 'express';
-import { getAllPosts } from '../controllers/blog.controller';
+import { getAllPosts, addPost } from '../controllers/blog.controller';
+
 
 const blogRouter = express.Router();
 
 //**Router for the blog feature. */
 
 /**Route for adding post */
-// blogRouter.post('/add', (req, res, next: NextFunction) => {
+blogRouter.post('/add', async (req, res, next: NextFunction) => {
+
+    const { postText, fileName } = req.body;
+    if (!postText) {
+        return res.send(400).json({ error: "Text is required " });
+    }
+    try {
+        //will be removed when auth token is implemented
+        const user_id = 1;
+        const newPost = addPost(postText, fileName, user_id);
+        res.status(200).json(newPost);
+    } catch (error) {
+        next(error);
+    }
+
+});
 
 
-// });
 /**Route for fetching posts */
 blogRouter.get('/getAllPosts/:userID', async (req, res, next: NextFunction) => {
     const param = req.params.userID

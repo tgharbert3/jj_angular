@@ -1,4 +1,4 @@
-import { getAllPostsFromDB } from "../services/blog.service";
+import { getAllPostsFromDB, addPostToDb } from "../services/blog.service";
 import { validateNumber } from "../middleware/shared";
 
 /**
@@ -24,4 +24,20 @@ export async function getAllPosts(userID: number) {
         throw Error(`Error from blog Controller ${error}`);
     }
 
+};
+
+/**
+ * Controller for adding post to the db
+ * @param postText The text of the blog post
+ * @param fileName Optional picture upload
+ * @returns the new post after it was added to the db
+ */
+export async function addPost(postText: string, fileName: string, userID: number) {
+    try {
+        const newPost = await addPostToDb(postText, fileName, userID);
+        return newPost;
+    } catch (error) {
+        console.error("Unaable to add post");
+        throw Error(`Error adding post from controller: ${error}`);
+    }
 }
