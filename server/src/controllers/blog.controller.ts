@@ -1,4 +1,4 @@
-import { getAllPostsFromDB, addPostToDb } from "../services/blog.service";
+import { getAllPostsFromDB, addPostToDb, updatePostInDb, deletePostFromDb } from "../services/blog.service";
 import { validateNumber } from "../middleware/shared";
 
 /**
@@ -33,11 +33,61 @@ export async function getAllPosts(userID: number) {
  * @returns the new post after it was added to the db
  */
 export async function addPost(postText: string, fileName: string, userID: number) {
+    if (!validateNumber(userID)) {
+        console.info("Not a valid Image id");
+        return null;
+    }
     try {
         const newPost = await addPostToDb(postText, fileName, userID);
+        if (!newPost) {
+            return null;
+        }
         return newPost;
     } catch (error) {
         console.error("Unaable to add post");
         throw Error(`Error adding post from controller: ${error}`);
     }
 }
+
+/**
+ * Function to update the post content
+ * @param userId User 
+ * @param postID which post to update
+ * @param postText new postText
+ * @param fileName new fileName
+ * @returns the new post
+ */
+export async function updatePost(userId: number, postID: number, postText: string, fileName: string) {
+    if (!validateNumber(userId) || (!validateNumber(postID))) {
+        console.info("Not a valid Image id");
+        return null;
+    };
+
+    try {
+        const newPost = await updatePostInDb(userId, postID, postText, fileName);
+        if (!newPost) {
+            return null;
+        }
+        return newPost;
+    } catch (error) {
+        console.error('Unable to update post');
+        throw Error(`Error updating post from controller: ${error}`);
+    }
+};
+
+export async function deletePost(postId: number) {
+    if (!validateNumber(postId)) {
+        console.info("Not a valid post id");
+        return null;
+    }
+    try {
+        const deletedPost = await deletePostFromDb(postId);
+        if (!deletedPost) {
+            return null;
+        };
+        return deletedPost;
+    } catch (error) {
+        console.error(error);
+        throw Error(`Error: ${(error as Error).message}`)
+    }
+};

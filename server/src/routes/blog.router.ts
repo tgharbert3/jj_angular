@@ -1,5 +1,5 @@
 import express, { NextFunction } from 'express';
-import { getAllPosts, addPost } from '../controllers/blog.controller';
+import { getAllPosts, addPost, updatePost, deletePost } from '../controllers/blog.controller';
 
 
 const blogRouter = express.Router();
@@ -11,12 +11,13 @@ blogRouter.post('/add', async (req, res, next: NextFunction) => {
 
     const { postText, fileName } = req.body;
     if (!postText) {
-        return res.send(400).json({ error: "Text is required " });
+        return res.status(400).json({ error: "Text is required " });
     }
     try {
         //will be removed when auth token is implemented
         const user_id = 1;
-        const newPost = addPost(postText, fileName, user_id);
+        //when testing, make sure that it has to return a valid object
+        const newPost = await addPost(postText, fileName, user_id);
         res.status(200).json(newPost);
     } catch (error) {
         next(error);
@@ -41,6 +42,42 @@ blogRouter.get('/getAllPosts/:userID', async (req, res, next: NextFunction) => {
     } catch (error) {
         next(error);
     }
-})
+});
+
+/**Route for updating a post */
+blogRouter.patch('/update/:userId/:postId', async (req, res, next: NextFunction) => {
+
+    const userParam = req.params.userId
+    const postParam = req.params.postId;
+    const { postText, fileName } = req.body;
+
+    const userId = parseInt(userParam, 10);
+    const postId = parseInt(postParam, 10);
+
+    try {
+        const newPost = await updatePost(userId, postId, postText, fileName);
+        if (!newPost) {
+            return res.status(404).json({ error: "Unable to update post: No post found" })
+        }
+        res.status(200).json(newPost);
+    } catch (error) {
+        next(error);
+    };
+});
+
+/**Route for deleting post */
+blogRouter.delete('/delete/:postId', async (req, res, next: NextFunction) => {
+
+    const postId = parseInt(req.params.postId, 10);
+    try {
+        const deletedPost = await deletePost(postId);
+        if (!deletedPost) {
+            return res.status(404).json({ error: "Unable to delete post: No post found" });
+        };
+        res.status(200).json({ post: deletedPost });
+    } catch (error) {
+        next(error);
+    };
+});
 
 export default blogRouter;

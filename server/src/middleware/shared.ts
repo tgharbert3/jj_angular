@@ -5,4 +5,4 @@
  */
 export function validateNumber(number: number) {
     return typeof number === 'number' && Number.isFinite(number) && number > 0;
-}
+};

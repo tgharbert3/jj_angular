@@ -3,7 +3,6 @@ jest.mock('../../../config');
 import { db } from "../../../config";
 import dotenv from 'dotenv';
 import { getAllPostsFromDB, addPostToDb } from "../../../services/blog.service";
-import { mock } from "node:test";
 
 
 describe('Unit tests for blog service', () => {
@@ -14,7 +13,7 @@ describe('Unit tests for blog service', () => {
     });
 
     afterEach(() => {
-        jest.clearAllMocks();
+        jest.resetAllMocks();
     })
 
     /**Tests under normal operation */
@@ -47,21 +46,21 @@ describe('Unit tests for blog service', () => {
 });
 
 describe('Tests the add serive', () => {
-    const mockDB = db.one as jest.Mock;
+    const mockDB = db.oneOrNone as jest.Mock;
 
     afterEach(() => {
-        jest.clearAllMocks;
+        jest.resetAllMocks()
     })
 
     /**Tests under the normal operation */
-    it('Should return the object that was added', async () => {
+    it('Should return the postId that was added', async () => {
         mockDB.mockResolvedValueOnce({
             postId: 1,
         }
         );
 
         const userId = 1;
-        const fileName = '';
+        const fileName = 'This is the first file';
         const postText = 'This is the first post';
         const newPost = await addPostToDb(postText, fileName, userId);
         expect(newPost).toMatchObject(
@@ -73,6 +72,15 @@ describe('Tests the add serive', () => {
     });
 
     /**Tests the catch block */
-    it.skip('Should throw an error', () => { })
+    it('Should throw an error', async () => {
+        mockDB.mockRejectedValueOnce(new Error("Unable to add post"));
+
+        const userId = 1;
+        const fileName = 'This is the first file';
+        const postText = 'This is the first post';
+        await expect(addPostToDb(postText, fileName, userId)).rejects.toThrow("Unable to add post");
+
+        expect(mockDB).toHaveBeenCalledTimes(1);
+    })
 });
 
