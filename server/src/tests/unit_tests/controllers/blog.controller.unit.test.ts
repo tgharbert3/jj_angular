@@ -1,7 +1,7 @@
 jest.mock('../../../services/blog.service')
 
-import { getAllPostsFromDB, addPostToDb } from "../../../services/blog.service";
-import { getAllPosts, addPost } from "../../../controllers/blog.controller";
+import { getAllPostsFromDB, addPostToDb, updatePostInDb, deletePostFromDb } from "../../../services/blog.service";
+import { getAllPosts, addPost, updatePost, deletePost } from "../../../controllers/blog.controller";
 
 describe('Unit tests the blog controller', () => {
     const postText = 'This is the post text';
@@ -106,5 +106,54 @@ describe('Unit tests the blog controller', () => {
         });
     });
 
+    describe('Tests the update post function', () => {
+        const mockUpdatePostInDb = updatePostInDb as jest.Mock;
 
+        /**Tests under normal operateion */
+        it('Should return an object', async () => {
+            mockUpdatePostInDb.mockResolvedValueOnce({
+                userId,
+                postId,
+                postText,
+                fileName,
+            });
+
+            const response = await updatePost(userId, postId, postText, fileName);
+            expect(response).toEqual({
+                userId,
+                postId,
+                postText,
+                fileName
+            });
+            expect(mockUpdatePostInDb).toHaveBeenCalledTimes(1);
+        });
+
+        /**Tests the invalid userId and postId */
+        it('Should return null', async () => {
+            const invalidUser = await updatePost(-1, postId, postText, fileName);
+            const invalidPost = await updatePost(userId, Infinity, postText, fileName);
+
+            expect(invalidUser).toBeNull();
+            expect(invalidPost).toBeNull();
+        });
+
+        /**Tests the empty return from the db */
+        it('Should return null', async () => {
+            mockUpdatePostInDb.mockResolvedValueOnce(null);
+
+            const response = await updatePost(userId, postId, postText, fileName);
+
+            expect(response).toBeNull();
+            expect(mockUpdatePostInDb).toHaveBeenCalledTimes(1);
+        });
+
+        /**Tests the catch block */
+        it('Should return an error', async () => {
+            mockUpdatePostInDb.mockRejectedValueOnce(new Error('Unable to update post'));
+
+            await expect(updatePost(userId, postId, postText, fileName)).rejects.toThrow('Unable to update post');
+            expect(mockUpdatePostInDb).toHaveBeenCalledTimes(1);
+        });
+
+    })
 })
