@@ -155,5 +155,53 @@ describe('Unit tests the blog controller', () => {
             expect(mockUpdatePostInDb).toHaveBeenCalledTimes(1);
         });
 
-    })
+    });
+
+    describe('Unit tests the delete function', () => {
+        const mockDeletePostFromDb = deletePostFromDb as jest.Mock;
+
+        /**Tests under normal operation */
+        it('should return and object', async () => {
+            mockDeletePostFromDb.mockResolvedValueOnce({
+                userId,
+                postId,
+                postText,
+                fileName,
+            });
+
+            const response = await deletePost(postId);
+            expect(response).toEqual({
+                userId,
+                postId,
+                postText,
+                fileName,
+            });
+
+            expect(mockDeletePostFromDb).toHaveBeenCalledTimes(1);
+        });
+
+        /**Tests the invalid post id */
+        it('Should return null', async () => {
+            const response = await deletePost(-1);
+            expect(response).toBeNull();
+        });
+
+        /**Test the return value from the db */
+        it('Should return null', async () => {
+            mockDeletePostFromDb.mockResolvedValueOnce(null);
+
+            const response = await deletePost(1);
+            expect(response).toBeNull();
+            expect(mockDeletePostFromDb).toHaveBeenCalledTimes(1);
+        });
+
+        /**Tests the catch block */
+        it('Should throw and error', async () => {
+            mockDeletePostFromDb.mockRejectedValueOnce(new Error('Unable to delete post'));
+
+            await expect(deletePost(1)).rejects.toThrow('Unable to delete post');
+            expect(mockDeletePostFromDb).toHaveBeenCalledTimes(1);
+        });
+    });
+
 })
