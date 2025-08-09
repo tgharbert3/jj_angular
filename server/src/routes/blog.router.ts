@@ -48,13 +48,17 @@ blogRouter.get('/getAllPosts/:userID', async (req, res, next: NextFunction) => {
 
 /**Route for updating a post */
 blogRouter.patch('/update/:userId/:postId', async (req, res, next: NextFunction) => {
-
-    const userParam = req.params.userId
-    const postParam = req.params.postId;
     const { postText, fileName } = req.body;
+    if (!postText) {
+        return res.status(400).json({ error: "Text is required" });
+    }
 
-    const userId = parseInt(userParam, 10);
-    const postId = parseInt(postParam, 10);
+    const userId = parseInt(req.params.userId, 10);
+    const postId = parseInt(req.params.postId, 10);
+
+    if (Number.isNaN(userId) || Number.isNaN(postId)) {
+        return res.status(400).json({ error: "Need a valid number for user and post id" });
+    };
 
     try {
         const newPost = await updatePost(userId, postId, postText, fileName);
@@ -71,12 +75,16 @@ blogRouter.patch('/update/:userId/:postId', async (req, res, next: NextFunction)
 blogRouter.delete('/delete/:postId', async (req, res, next: NextFunction) => {
 
     const postId = parseInt(req.params.postId, 10);
+    if (Number.isNaN(postId)) {
+        return res.status(400).json({ error: 'Valid postId is required' });
+    }
+
     try {
         const deletedPost = await deletePost(postId);
         if (!deletedPost) {
-            return res.status(404).json({ error: "Unable to delete post: No post found" });
+            return res.status(400).json({ error: "Unable to delete post: No post found" });
         };
-        res.status(200).json({ post: deletedPost });
+        res.status(200).json(deletedPost);
     } catch (error) {
         next(error);
     };
