@@ -75,6 +75,11 @@ export async function updatePost(userId: number, postID: number, postText: strin
     }
 };
 
+/**
+ * Controller function for deleted a post
+ * @param postId the post to delete
+ * @returns the information of the post that needs to be deleted
+ */
 export async function deletePost(postId: number) {
     if (!validateNumber(postId)) {
         console.info("Not a valid post id");

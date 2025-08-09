@@ -11,18 +11,20 @@ blogRouter.post('/add', async (req, res, next: NextFunction) => {
 
     const { postText, fileName } = req.body;
     if (!postText) {
-        return res.status(400).json({ error: "Text is required " });
+        return res.status(400).json({ error: "Text is required" });
     }
     try {
         //will be removed when auth token is implemented
         const user_id = 1;
         //when testing, make sure that it has to return a valid object
         const newPost = await addPost(postText, fileName, user_id);
+        if (!newPost) {
+            return res.status(500).json({ error: 'Unable to add post' });
+        }
         res.status(200).json(newPost);
     } catch (error) {
         next(error);
     }
-
 });
 
 
