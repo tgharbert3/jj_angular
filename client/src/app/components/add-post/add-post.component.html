@@ -1,0 +1,26 @@
+<h2>Add New Post</h2>
+<form>
+    <fieldset>
+        <div id="postTitle">
+            <label for="title" id="title"><strong>Post Title:</strong></label>
+            <br>
+            <input type="text" id="title" placeholder="Title">
+        </div>
+
+        <textarea placeholder="Post"></textarea>
+        <div id="picture">
+            <label for="file">Upload a Picture: </label>
+            <br>
+            <input type="file" id="file">
+            <label>Date: </label>
+            <br>
+            <input type="date">
+        </div>
+
+    </fieldset>
+    <div id="buttons">
+        <input type="submit" name="add" id="add" value="Add Post">
+        <button id="Close" (click)="CloseModal()">Close</button>
+        <input type="reset" value="Clear">
+    </div>
+</form>
