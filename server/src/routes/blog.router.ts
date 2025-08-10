@@ -40,7 +40,7 @@ blogRouter.get('/getAllPosts/:userID', async (req, res, next: NextFunction) => {
         if (!posts) {
             return res.status(404).json({ message: "No posts found" });
         }
-        res.status(200).json(posts);
+        res.status(200).json({ posts: posts });
     } catch (error) {
         next(error);
     }

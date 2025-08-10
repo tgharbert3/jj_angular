@@ -3,7 +3,6 @@ jest.mock('../../../controllers/blog.controller');
 import app from "../../../app";
 import request from 'supertest';
 import { getAllPosts, addPost, updatePost, deletePost } from "../../../controllers/blog.controller";
-import { response } from "express";
 
 
 describe('Unit Test for blog router', () => {
@@ -32,7 +31,7 @@ describe('Unit Test for blog router', () => {
 
             const response = await request(app).get('/blog/getAllPosts/1');
             expect(response.status).toEqual(200);
-            expect(response.body).toMatchObject([
+            expect(response.body.posts).toMatchObject([
                 {
                     userId: 1,
                     postId: 1,

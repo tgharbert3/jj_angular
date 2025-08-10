@@ -8,7 +8,7 @@ import { db } from "../config";
  */
 export async function getAllPostsFromDB(userID: number) {
     try {
-        const posts = await db.manyOrNone('SELECT * FROM POSTS WHERE userID = $1', [userID])
+        const posts = await db.manyOrNone('SELECT * FROM users.posts WHERE userID = $1', [userID])
         return posts
     } catch (error) {
         console.error(error);
@@ -24,7 +24,7 @@ export async function getAllPostsFromDB(userID: number) {
  */
 export async function addPostToDb(postText: string, fileName: string, userID: number) {
     try {
-        const newPost = await db.oneOrNone(`INSERT INTO posts(postText, fileName, userID) VALUES ($1, $2, $3) RETURNING postID`, [postText, fileName, userID]);
+        const newPost = await db.oneOrNone(`INSERT INTO users.posts(postText, fileName, userID) VALUES ($1, $2, $3) RETURNING postID`, [postText, fileName, userID]);
         return newPost;
     } catch (error) {
         console.error(error);
@@ -42,7 +42,7 @@ export async function addPostToDb(postText: string, fileName: string, userID: nu
  */
 export async function updatePostInDb(userId: number, postId: number, postText: string, fileName: string) {
     try {
-        const updatedPost = await db.oneOrNone(`UPDATE posts SET postText = $3, fileName = $4 WHERE userid = $1 AND postid = $2 RETURNING *`, [userId, postId, postText, fileName]);
+        const updatedPost = await db.oneOrNone(`UPDATE users.posts SET postText = $3, fileName = $4 WHERE userId = $1 AND postId = $2 RETURNING *`, [userId, postId, postText, fileName]);
         return updatedPost;
     } catch (error) {
         console.error(error);
@@ -58,7 +58,7 @@ export async function updatePostInDb(userId: number, postId: number, postText: s
 export async function deletePostFromDb(postId: number) {
     try {
 
-        const deletedPosted = await db.oneOrNone(`DELETE FROM posts WHERE postID = $1 RETURNING *`, [postId]);
+        const deletedPosted = await db.oneOrNone(`DELETE FROM users.posts WHERE postID = $1 RETURNING *`, [postId]);
         return deletedPosted;
     } catch (error) {
         console.error(error);

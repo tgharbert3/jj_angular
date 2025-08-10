@@ -44,7 +44,7 @@ export async function addPost(postText: string, fileName: string, userID: number
         }
         return newPost;
     } catch (error) {
-        console.error("Unaable to add post");
+        console.error("Unable to add post");
         throw Error(`Error adding post from controller: ${error}`);
     }
 }
