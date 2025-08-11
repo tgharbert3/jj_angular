@@ -9,15 +9,15 @@ const blogRouter = express.Router();
 /**Route for adding post */
 blogRouter.post('/add', async (req, res, next: NextFunction) => {
 
-    const { postText, fileName } = req.body;
-    if (!postText) {
-        return res.status(400).json({ error: "Text is required" });
+    const { postText, fileName, postTitle, postDate } = req.body;
+    if (!postText || !postTitle || !postDate) {
+        return res.status(400).json({ error: "Text, title, and date are required" });
     }
     try {
         //will be removed when auth token is implemented
         const user_id = 1;
         //when testing, make sure that it has to return a valid object
-        const newPost = await addPost(postText, fileName, user_id);
+        const newPost = await addPost(postText, fileName, user_id, postTitle, postDate);
         if (!newPost) {
             return res.status(500).json({ error: 'Unable to add post' });
         }
@@ -48,9 +48,9 @@ blogRouter.get('/getAllPosts/:userID', async (req, res, next: NextFunction) => {
 
 /**Route for updating a post */
 blogRouter.patch('/update/:userId/:postId', async (req, res, next: NextFunction) => {
-    const { postText, fileName } = req.body;
-    if (!postText) {
-        return res.status(400).json({ error: "Text is required" });
+    const { postText, fileName, postTitle, postDate } = req.body;
+    if (!postText || !postTitle || !postDate) {
+        return res.status(400).json({ error: "Text, title, and date are required" });
     }
 
     const userId = parseInt(req.params.userId, 10);
@@ -61,7 +61,7 @@ blogRouter.patch('/update/:userId/:postId', async (req, res, next: NextFunction)
     };
 
     try {
-        const newPost = await updatePost(userId, postId, postText, fileName);
+        const newPost = await updatePost(userId, postId, postText, fileName, postTitle, postDate);
         if (!newPost) {
             return res.status(404).json({ error: "Unable to update post: No post found" })
         }

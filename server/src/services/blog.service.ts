@@ -22,9 +22,9 @@ export async function getAllPostsFromDB(userID: number) {
  * @param fileName The filename for the optional photo
  * @param userID : the user it belongs to
  */
-export async function addPostToDb(postText: string, fileName: string, userID: number) {
+export async function addPostToDb(postText: string, fileName: string, userID: number, postTitle: string, postDate: string) {
     try {
-        const newPost = await db.oneOrNone(`INSERT INTO users.posts(postText, fileName, userID) VALUES ($1, $2, $3) RETURNING postID`, [postText, fileName, userID]);
+        const newPost = await db.oneOrNone(`INSERT INTO users.posts(postText, fileName, userID, postTitle, postDate) VALUES ($1, $2, $3, $4, $5) RETURNING postID`, [postText, fileName, userID, postTitle, postDate]);
         return newPost;
     } catch (error) {
         console.error(error);
@@ -40,9 +40,9 @@ export async function addPostToDb(postText: string, fileName: string, userID: nu
  * @param fileName the new filename
  * @returns The updated post information
  */
-export async function updatePostInDb(userId: number, postId: number, postText: string, fileName: string) {
+export async function updatePostInDb(userId: number, postId: number, postText: string, fileName: string, postTitle: string, postDate: string) {
     try {
-        const updatedPost = await db.oneOrNone(`UPDATE users.posts SET postText = $3, fileName = $4 WHERE userId = $1 AND postId = $2 RETURNING *`, [userId, postId, postText, fileName]);
+        const updatedPost = await db.oneOrNone(`UPDATE users.posts SET postText = $3, fileName = $4, postTitle = $5, postDate = $6  WHERE userId = $1 AND postId = $2 RETURNING *`, [userId, postId, postText, fileName, postTitle, postDate]);
         return updatedPost;
     } catch (error) {
         console.error(error);

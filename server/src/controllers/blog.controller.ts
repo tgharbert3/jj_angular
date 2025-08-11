@@ -32,13 +32,13 @@ export async function getAllPosts(userID: number) {
  * @param fileName Optional picture upload
  * @returns the new post after it was added to the db
  */
-export async function addPost(postText: string, fileName: string, userID: number) {
+export async function addPost(postText: string, fileName: string, userID: number, postTitle: string, postDate: string) {
     if (!validateNumber(userID)) {
         console.info("Not a valid Image id");
         return null;
     }
     try {
-        const newPost = await addPostToDb(postText, fileName, userID);
+        const newPost = await addPostToDb(postText, fileName, userID, postTitle, postDate);
         if (!newPost) {
             return null;
         }
@@ -57,14 +57,14 @@ export async function addPost(postText: string, fileName: string, userID: number
  * @param fileName new fileName
  * @returns the new post
  */
-export async function updatePost(userId: number, postID: number, postText: string, fileName: string) {
+export async function updatePost(userId: number, postID: number, postText: string, fileName: string, postTitle: string, postDate: string) {
     if (!validateNumber(userId) || (!validateNumber(postID))) {
         console.info("Not a valid Image id");
         return null;
     };
 
     try {
-        const newPost = await updatePostInDb(userId, postID, postText, fileName);
+        const newPost = await updatePostInDb(userId, postID, postText, fileName, postTitle, postDate);
         if (!newPost) {
             return null;
         }
